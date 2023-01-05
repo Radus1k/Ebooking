@@ -1,4 +1,4 @@
-FROM python:3.11.1-bullseye
+FROM python:3.10.9-buster
 
 WORKDIR /usr/src/app
 
@@ -21,5 +21,5 @@ RUN pip install -r requirements.txt
 
 RUN sed -i -e 's/\r$//' entrypoint_dev_django.sh
 
-# 
-# ENTRYPOINT ["./docker/entrypoint_dev_django.sh"]
+
+ENTRYPOINT ["./docker/entrypoint_dev_django.sh"]
