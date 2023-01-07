@@ -1,3 +1,4 @@
 */*.sock
-/backend/env/
+/ebooking/env/
 .idea/
+*.pyc 

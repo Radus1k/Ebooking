@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd backend/ebooking
+cd ebooking
 
 python manage.py  makemigrations
 python manage.py  migrate

@@ -12,7 +12,7 @@ RUN apt-get install -f
 RUN apt update
 
 # Copy project files
-COPY backend/ebooking/ /usr/src/app/
+COPY ebooking/ /usr/src/app/
 
 # Copy entrypoint script to container
 COPY docker/entrypoint_celery.sh /usr/src/app/entrypoint_celery.sh
