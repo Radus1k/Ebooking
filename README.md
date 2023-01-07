@@ -60,11 +60,11 @@ Use `up -d --build` only when the `docker-compose.dev.yml` file is changed.
 ## **Extra** commands
 Force build images & start containers for an environment: 
 ```
- docker compose -f ./docker-compose.[dev|prod].yml up -d --build --remove-orphans --force-recreate
+ docker compose -f ./docker-compose.dev.yml up -d --build --remove-orphans --force-recreate
 ```
 Force rebuild of **ONLY ONE** service: 
 ```
- docker compose -f ./docker-compose.[dev|prod].yml build <service name>
+ docker compose -f ./docker-compose.de.yml build <service name>
 ```
 List all images on the host system: 
 ```
