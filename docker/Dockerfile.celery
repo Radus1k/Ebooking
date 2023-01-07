@@ -15,11 +15,12 @@ RUN apt update
 COPY backend/ebooking/ /usr/src/app/
 
 # Copy entrypoint script to container
-COPY docker/entrypoint_celery.sh /usr/src/app/
+COPY docker/entrypoint_celery.sh /usr/src/app/entrypoint_celery.sh
 # Solve Python dependencies
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
+CMD pwd
 RUN sed -i -e 's/\r$//' entrypoint_celery.sh
 
 

@@ -32,7 +32,7 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile.celery
-    command: celery -A app.celery beat
+    command: celery -A ebooking.celery beat
     volumes:
       - .:/usr/src/app
     hostname: celery_beat
@@ -51,7 +51,7 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile.celery
-    command: celery -A app.celery worker
+    command: celery -A ebooking.celery worker
     volumes:
       - .:/usr/src/app
       - /tmp:/tmp

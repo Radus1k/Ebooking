@@ -1,8 +1,9 @@
 #!/bin/sh
+cd backend/ebooking
 
-python source/manage.py makemigrations
-python source/manage.py migrate
+python manage.py makemigrations
+python manage.py migrate
 
-python source/manage.py runserver 0.0.0.0:8000
+python manage.py runserver 0.0.0.0:8000
 
 exec "$@"

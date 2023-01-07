@@ -7,7 +7,7 @@ RUN apt update
 RUN apt install -y gcc python3-dev build-essential libpq-dev	
 
 # Copy project files
-COPY backend/ebooking/ /usr/src/app/
+COPY backend/ebooking/ .
 
 # Copy uWSGI config file
 # COPY config/labmalware_uwsgi.ini /usr/src/app/labmalware_uwsgi.ini
