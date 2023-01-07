@@ -1,7 +1,7 @@
 # Ebooking
 
 
-Simple Ebooking website using Django for backend & frontend
+Simple Ebooking website using Django for backend & frontend, dockerized
 
 ## Technology stack  
 - **Deployment**: Docker Compose v2.12.2 (Docker Engine - Community v20.10.21)
@@ -10,7 +10,6 @@ Simple Ebooking website using Django for backend & frontend
 - **Message broker**: Redis 5.0.7
 - **Frontend**: Django templates
 - **Styling**: Bootstrap4, Django Crispy Forms
-- **Development OS**: Ubuntu 20.04 LTS
 
 ## Setting up OS Requirements
 1. Follow instructions at [Install Docker Engine on Ubuntu (Install using the repository)](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository).  
