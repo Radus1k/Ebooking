@@ -1,0 +1,80 @@
+[
+    {
+      "model": "hotels.Hotel",
+      "pk": 1,
+      "fields": {
+        "image": "/hotel_photos/3.jpg",
+        "hotelRooms": null,
+        "name": "Alpina",
+        "stars": 2,
+        "city": "Bucuresti",
+        "region": "Muntenia",
+        "country": "Romania",
+        "zone": "central",
+        "rooms": 50,
+        "floors": 4,
+        "parking_places":30,
+        "restaurant_places":5, 
+        "has_wifi": true,
+        "has_breakfast": false
+      }
+    },
+    {
+        "model": "hotels.Hotel",
+        "pk": 2,
+        "fields": {
+          "name": "Grand Hotel",
+          "image": "/hotel_photos/grand.jpg",
+          "stars": 5,
+          "city": "Bucuresti",
+          "region": "Muntenia",
+          "country": "Romania",
+          "zone": "central",
+          "rooms": 50,
+          "floors": 4,
+          "parking_places":30,
+          "restaurant_places":5, 
+          "has_wifi": true,
+          "has_breakfast": false
+        }
+      },
+      {
+        "model": "hotels.Hotel",
+        "pk": 3,
+        "fields": {
+          "name": "Marriot",
+          "image": "/hotel_photos/marriott.jpg",
+          "stars": 4,
+          "city": "Bucuresti",
+          "region": "Muntenia",
+          "country": "Romania",
+          "zone": "central",
+          "rooms": 50,
+          "floors": 4,
+          "parking_places":30,
+          "restaurant_places":5, 
+          "has_wifi": true,
+          "has_breakfast": false
+        }
+      },
+      {
+        "model": "hotels.Hotel",
+        "pk": 4,
+        "fields": {
+          "name": "Rin Grand Hotel",
+          "image": "/hotel_photos/rin.jpg",
+          "stars": 4,
+          "city": "Bucuresti",
+          "region": "Muntenia",
+          "country": "Romania",
+          "zone": "central",
+          "rooms": 50,
+          "floors": 4,
+          "parking_places":20,
+          "restaurant_places":5, 
+          "has_wifi": true,
+          "has_breakfast": true
+        }
+      }
+   
+  ]
