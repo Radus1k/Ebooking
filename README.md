@@ -12,10 +12,10 @@ Simple Ebooking website using Django for backend & frontend, dockerized
 - **Styling**: Bootstrap4, Django Crispy Forms
 
 ## Setting up OS Requirements
-1. Follow instructions at [Install Docker Engine on Ubuntu (Install using the repository)](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository).  
+1. Install Docker on your OS. 
 ⚠️ Check your Docker Compose version by running `docker compose version`. Expected output: `Docker Compose version v2.6.0`.
 
-2. Follow instructions at [Post-installation steps for Linux (Manage Docker as a non-root user)](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) in order to be able to run Docker without `root` privileges. Afterwards, run these two commands 
+2.* Follow instructions at [Post-installation steps for Linux (Manage Docker as a non-root user)](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) in order to be able to run Docker without `root` privileges. Afterwards, run these two commands 
 ```
  sudo systemctl enable docker.service
  sudo systemctl enable containerd.service
@@ -48,7 +48,16 @@ Use `stop` when leaving for the day.
 Use `start` when you start working.  
 Use `up -d --build` only when the `docker-compose.dev.yml` file is changed.
 
+
+#### **Pg Admin Setup**
+
+- Go to localhost:8001
+- Login with the credentials defined in the docker-compose file, associated with the pg_admin container
+- Register a new Server connection
+- In the connection Tab,the hostname is the db_postgres container's name, credentials are defined in the docker-compose file asscoiated with the db_postgres container
+- Data is in the Servers->Databases Schemas->Tables
 #### **Services**
+
 
 - [+django+]: Responsible for running the development webserver at `0.0.0.0:8000`. Autoreload functionality on code change is also functional,  
 - [+db_postgres+]: PostgreSQL database server. Used here in order to more closely resemble the prod environment,  
@@ -60,11 +69,11 @@ Use `up -d --build` only when the `docker-compose.dev.yml` file is changed.
 ## **Extra** commands
 Force build images & start containers for an environment: 
 ```
- docker compose -f ./docker-compose.[dev|prod].yml up -d --build --remove-orphans --force-recreate
+ docker compose -f ./docker-compose.dev.yml up -d --build --remove-orphans --force-recreate
 ```
 Force rebuild of **ONLY ONE** service: 
 ```
- docker compose -f ./docker-compose.[dev|prod].yml build <service name>
+ docker compose -f ./docker-compose.de.yml build <service name>
 ```
 List all images on the host system: 
 ```
