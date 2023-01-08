@@ -48,7 +48,16 @@ Use `stop` when leaving for the day.
 Use `start` when you start working.  
 Use `up -d --build` only when the `docker-compose.dev.yml` file is changed.
 
+
+#### **Pg Admin Setup**
+
+- Go to localhost:8001
+- Login with the credentials defined in the docker-compose file, associated with the pg_admin container
+- Register a new Server connection
+- In the connection Tab,the hostname is the db_postgres container's name, credentials are defined in the docker-compose file asscoiated with the db_postgres container
+- Data is in the Servers->Databases Schemas->Tables
 #### **Services**
+
 
 - [+django+]: Responsible for running the development webserver at `0.0.0.0:8000`. Autoreload functionality on code change is also functional,  
 - [+db_postgres+]: PostgreSQL database server. Used here in order to more closely resemble the prod environment,  
