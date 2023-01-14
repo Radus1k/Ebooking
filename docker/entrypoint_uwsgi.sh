@@ -2,9 +2,10 @@
 
 cd ebooking
 
-python manage.py  makemigrations
-python manage.py  migrate
 python manage.py loaddata hotels 
+python manage.py  makemigrations hotels 
+python manage.py  migrate hotels
+
 
 uwsgi --ini labmalware_uwsgi.ini
 

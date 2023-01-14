@@ -1,11 +1,11 @@
-FROM ubuntu/redis
+FROM redis:alpine
 
 WORKDIR /usr/src/redis
 
 COPY config/redis.conf /usr/src/redis/redis.conf
 COPY docker/entrypoint_redis.sh .
 
-RUN sed -i -e 's/\r$//' entrypoint_redis.sh
+# RUN sed -i -e 's/\r$//' entrypoint_redis.sh
 
 # CMD redis-server ./redis.conf --loglevel debug
 ENTRYPOINT ["./entrypoint_redis.sh"]

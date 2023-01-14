@@ -2,3 +2,4 @@
 /ebooking/env/
 .idea/
 *.pyc 
+/*/migrations/*
