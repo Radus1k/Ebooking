@@ -1,0 +1,21 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block roomrent %}
+
+<link href="{% static 'css/hotels.css' %}" rel="stylesheet">
+
+    {% for room in hotelrooms %}
+    
+        <p>BEDS:  {{ room.beds }}
+        <p>IMAGE:  {{ room.image }}    
+
+    {% empty %}
+        <li>Sorry, no rooms available atm!</li>        
+
+    {% endfor %}
+
+</div>   
+
+{% endblock %}

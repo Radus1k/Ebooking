@@ -1,0 +1,54 @@
+[
+    {
+      "model": "hotels.HotelRoom",
+      "pk": 1,
+      "fields": {
+        "hotel": "1",
+        "image": null,
+        "beds": true,
+        "has_terrace": true,
+        "has_kitchen": true,
+        "has_tv": true,
+        "floor_no": 1
+      }
+    },
+    {
+        "model": "hotels.HotelRoom",
+        "pk": 2,
+        "fields": {
+          "hotel": "1",
+          "image": null,
+          "beds": true,
+          "has_terrace": true,
+          "has_kitchen": true,
+          "has_tv": true,
+          "floor_no": 1
+        }
+      },
+      {
+        "model": "hotels.HotelRoom",
+        "pk": 3,
+        "fields": {
+          "hotel": "2",
+          "image": null,
+          "beds": true,
+          "has_terrace": true,
+          "has_kitchen": true,
+          "has_tv": true,
+          "floor_no": 1
+        }
+      },
+      {
+        "model": "hotels.HotelRoom",
+        "pk": 4,
+        "fields": {
+          "hotel": "2",
+          "image": null,
+          "beds": true,
+          "has_terrace": true,
+          "has_kitchen": true,
+          "has_tv": true,
+          "floor_no": 1
+        }
+      }
+  ]
