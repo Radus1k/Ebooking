@@ -3,7 +3,7 @@
       "model": "hotels.Hotel",
       "pk": 1,
       "fields": {
-        "image": "/hotel_photos/3.jpg",
+        "image": "/hotelrooms_photos/grand_room.jpg",
         "hotelRooms": null,
         "name": "Alpina",
         "stars": 2,
@@ -24,7 +24,7 @@
         "pk": 2,
         "fields": {
           "name": "Grand Hotel",
-          "image": "/hotel_photos/grand.jpg",
+          "image": "/hotelrooms_photos/hotel_room.jpg",
           "stars": 5,
           "city": "Bucuresti",
           "region": "Muntenia",
@@ -43,7 +43,7 @@
         "pk": 3,
         "fields": {
           "name": "Marriot",
-          "image": "/hotel_photos/marriott.jpg",
+          "image": "/hotelrooms_photos/marriott_room.jpg",
           "stars": 4,
           "city": "Bucuresti",
           "region": "Muntenia",
@@ -62,7 +62,7 @@
         "pk": 4,
         "fields": {
           "name": "Rin Grand Hotel",
-          "image": "/hotel_photos/rin.jpg",
+          "image": "/hotelrooms_photos/resort_room.jpg",
           "stars": 4,
           "city": "Bucuresti",
           "region": "Muntenia",
