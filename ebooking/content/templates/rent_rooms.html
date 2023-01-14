@@ -4,12 +4,12 @@
 
 {% block roomrent %}
 
-<link href="{% static 'css/hotels.css' %}" rel="stylesheet">
 
     {% for room in hotelrooms %}
     
         <p>BEDS:  {{ room.beds }}
-        <p>IMAGE:  {{ room.image }}    
+        has terrace, ... toate inforamtiile
+        <p><img src="{{ room.image.url }}" alt="img">
 
     {% empty %}
         <li>Sorry, no rooms available atm!</li>        
