@@ -52,3 +52,84 @@
         }
       }
   ]
+
+//   <<<<<<< Gabi
+//       "model": "hotels.Hotel",
+//       "pk": 1,
+//       "fields": {
+//         "image": "/hotelrooms_photos/grand_room.jpg",
+//         "hotelRooms": null,
+//         "name": "Alpina",
+//         "stars": 2,
+//         "city": "Bucuresti",
+//         "region": "Muntenia",
+//         "country": "Romania",
+//         "zone": "central",
+//         "rooms": 50,
+//         "floors": 4,
+//         "parking_places":30,
+//         "restaurant_places":5, 
+//         "has_wifi": true,
+//         "has_breakfast": false
+//       }
+//     },
+//     {
+//         "model": "hotels.Hotel",
+//         "pk": 2,
+//         "fields": {
+//           "name": "Grand Hotel",
+//           "image": "/hotelrooms_photos/hotel_room.jpg",
+//           "stars": 5,
+//           "city": "Bucuresti",
+//           "region": "Muntenia",
+//           "country": "Romania",
+//           "zone": "central",
+//           "rooms": 50,
+//           "floors": 4,
+//           "parking_places":30,
+//           "restaurant_places":5, 
+//           "has_wifi": true,
+//           "has_breakfast": false
+//         }
+//       },
+//       {
+//         "model": "hotels.Hotel",
+//         "pk": 3,
+//         "fields": {
+//           "name": "Marriot",
+//           "image": "/hotelrooms_photos/marriott_room.jpg",
+//           "stars": 4,
+//           "city": "Bucuresti",
+//           "region": "Muntenia",
+//           "country": "Romania",
+//           "zone": "central",
+//           "rooms": 50,
+//           "floors": 4,
+//           "parking_places":30,
+//           "restaurant_places":5, 
+//           "has_wifi": true,
+//           "has_breakfast": false
+//         }
+//       },
+//       {
+//         "model": "hotels.Hotel",
+//         "pk": 4,
+//         "fields": {
+//           "name": "Rin Grand Hotel",
+//           "image": "/hotelrooms_photos/resort_room.jpg",
+//           "stars": 4,
+//           "city": "Bucuresti",
+//           "region": "Muntenia",
+//           "country": "Romania",
+//           "zone": "central",
+//           "rooms": 50,
+//           "floors": 4,
+//           "parking_places":20,
+//           "restaurant_places":5, 
+//           "has_wifi": true,
+//           "has_breakfast": true
+//         }
+//       }
+   
+//   ]
+// =======
