@@ -1,0 +1,5 @@
+Your room's rent was successfully confirmed.
+Here are some details about the order:
+ #TODO: Some context data
+
+

@@ -2,20 +2,11 @@ from django.db import models
 
 # Create your models here.
 
-class HotelRoom(models.Model):
-    image = models.ImageField(upload_to='hotelroom/', null=True)
-    beds = models.IntegerField()
-    has_terrace = models.BooleanField(default=True)
-    has_kitchen = models.BooleanField(default=True)
-    has_tv = models.BooleanField(default=True)
-    has_fridge = models.BooleanField(default=True)
-    floor_no = models.PositiveIntegerField()
-
 class Hotel(models.Model):
     image = models.ImageField(upload_to='hotel/', null=True)
     name = models.CharField(max_length=50, null=False)
     stars= models.PositiveIntegerField(null=False)
-    hotelRooms = models.ForeignKey(HotelRoom, on_delete=models.CASCADE, null=True) # oneToMany
+    
     city = models.CharField(max_length=50)
     region = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
@@ -30,6 +21,24 @@ class Hotel(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    class Meta:
+        db_table = 'hotel'
+
+
+class HotelRoom(models.Model):
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE,related_name='hotel', null=True)
+    image = models.ImageField(upload_to='hotelroom/', null=True)
+    beds = models.IntegerField()
+    has_terrace = models.BooleanField(default=True)
+    has_kitchen = models.BooleanField(default=True)
+    has_tv = models.BooleanField(default=True)
+    has_fridge = models.BooleanField(default=True)
+    floor_no = models.PositiveIntegerField()
+
+    class Meta:
+        db_table = 'hotelroom'
+
+
 class Reservation(models.Model):
     hotelRoom = models.ForeignKey(HotelRoom, on_delete=models.CASCADE, null=True) # oneToMany
     begin_at = models.DateTimeField(null=False)
@@ -41,3 +50,6 @@ class Reservation(models.Model):
 
     def __str__(self) -> str:
         return self.name  
+
+    class Meta:
+        db_table = 'reservation'

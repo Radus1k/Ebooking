@@ -4,7 +4,6 @@
       "pk": 1,
       "fields": {
         "image": "/hotel_photos/3.jpg",
-        "hotelRooms": null,
         "name": "Alpina",
         "stars": 2,
         "city": "Bucuresti",
