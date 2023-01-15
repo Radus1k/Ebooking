@@ -11,6 +11,12 @@
         has terrace, ... toate inforamtiile
         <p><img src="{{ room.image.url }}" alt="img">
 
+            <form class="box" method="post" style="padding-top: 5%; padding-bottom: 10%;">
+                {% csrf_token %}
+                <button type="submit" class="bn5" aria-pressed="true">Rezerva</button>
+            </form>
+
+
     {% empty %}
         <li>Sorry, no rooms available atm!</li>        
 

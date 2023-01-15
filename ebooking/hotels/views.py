@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseForbidden
 from hotels.models import Hotel, HotelRoom
 from .forms import ReservationForm
 from django.contrib import messages
-from .mail import send_mail
+from .mail import send_mail, send_mail_v2
 
 def index(request):
     all_hotel_objs = Hotel.objects.all()
@@ -25,14 +25,17 @@ def rent_rooms(request, hotel_id):
     form = ReservationForm()
     hotelRooms = HotelRoom.objects.filter(hotel=hotel_id)
 
-    context ={"form":form, "hotelrooms":hotelRooms}
-    email_context = {"rooms_rented": "10 rooms"}
+    context ={"form":form, "hotelrooms": hotelRooms}
+    email_context = {"subject": "Renting confirmation", "rooms":"10"}
+    to = "test@ebooking.local" # some name got from front end
+
+    send_mail_v2(email_context, to) 
 
     if request.method=="POST":
         form = ReservationForm(request.POST)
         if form.is_valid():
             form.save()
-            send_mail("radumarius975@gmail.com","confirm_rent.html",context=email_context)
+            send_mail_v2(email_context, to)
         else:
             messages.add_message(request, messages.ERROR, "Date introduse eronat!")
             return render(request, template_name='rent_rooms.html', context=context)

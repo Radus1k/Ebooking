@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 cd ebooking
 
 python manage.py loaddata hotels 

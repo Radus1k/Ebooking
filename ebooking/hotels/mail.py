@@ -5,8 +5,30 @@ from django.utils.translation import gettext_lazy as _
 
 
 def send_mail(to, template, context):
-    html_content = render_to_string(f'hotels/emails/{template}.html', context)
-    text_content = render_to_string(f'hotels/emails/{template}.txt', context)
+    html_content = render_to_string(f'emails/{template}', context)
+    text_content = render_to_string(f'emails/{template}', context)
     msg = EmailMultiAlternatives(context['subject'], text_content, settings.DEFAULT_FROM_EMAIL, [to])
     msg.attach_alternative(html_content, 'text/html')
     msg.send()
+
+def send_mail_v2(email_context, to):
+    #!/usr/bin/python
+
+    import smtplib
+    from email.mime.text import MIMEText
+
+    sender = 'test@mailhog.local'
+    receivers = ['test@mailhog.local'] # some user who enters his email
+
+
+    port = 1025
+    msg = MIMEText('Thank you for the reservation')
+
+    msg['Subject'] = 'Ebooking order'
+    msg['From'] = sender
+    msg['To'] = to
+
+    with smtplib.SMTP('host.docker.internal', port) as server:
+
+        # server.login('username', 'password')
+        server.sendmail(sender, receivers, msg.as_string())
