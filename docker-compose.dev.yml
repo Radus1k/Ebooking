@@ -120,11 +120,8 @@ services:
   
   test_email_server:
     image: mailhog/mailhog
-    # expose:
-    #   - 1025
-    #   - 8025
-    #   - 587
     ports:
-    - '1025:1025'
-    - '8025:8025'
-    - '587:587'
+      - "1025:1025"
+      - "8025:8025"
+    depends_on:
+    - django_dev

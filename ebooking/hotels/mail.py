@@ -11,7 +11,7 @@ def send_mail(to, template, context):
     msg.attach_alternative(html_content, 'text/html')
     msg.send()
 
-def send_mail_v2(email_context, to):
+def send_mail_v2(to, hotelRooms):
     #!/usr/bin/python
 
     import smtplib
@@ -20,6 +20,7 @@ def send_mail_v2(email_context, to):
     sender = 'test@mailhog.local'
     receivers = ['test@mailhog.local'] # some user who enters his email
 
+    body_msg = "You have reserved rooms with success"
 
     port = 1025
     msg = MIMEText('Thank you for the reservation')
@@ -27,8 +28,12 @@ def send_mail_v2(email_context, to):
     msg['Subject'] = 'Ebooking order'
     msg['From'] = sender
     msg['To'] = to
+    
+    print("Sending mail...")
 
     with smtplib.SMTP('host.docker.internal', port) as server:
 
         # server.login('username', 'password')
         server.sendmail(sender, receivers, msg.as_string())
+
+        print("**** Mail sent...*****")
