@@ -74,6 +74,44 @@
           "has_wifi": true,
           "has_breakfast": true
         }
+      },
+      {
+        "model": "hotels.Hotel",
+        "pk": 5,
+        "fields": {
+          "name": "Rin Grand Hotel",
+          "image": "/hotel_photos/rin.jpg",
+          "stars": 4,
+          "city": "Bucuresti",
+          "region": "Muntenia",
+          "country": "Romania",
+          "zone": "central",
+          "rooms": 50,
+          "floors": 4,
+          "parking_places":20,
+          "restaurant_places":5, 
+          "has_wifi": true,
+          "has_breakfast": true
+        }
+      },
+      {
+        "model": "hotels.Hotel",
+        "pk": 6,
+        "fields": {
+          "name": "Rin Grand Hotel",
+          "image": "/hotel_photos/rin.jpg",
+          "stars": 4,
+          "city": "Bucuresti",
+          "region": "Muntenia",
+          "country": "Romania",
+          "zone": "central",
+          "rooms": 50,
+          "floors": 4,
+          "parking_places":20,
+          "restaurant_places":5, 
+          "has_wifi": true,
+          "has_breakfast": true
+        }
       }
    
   ]

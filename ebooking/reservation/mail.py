@@ -23,9 +23,9 @@ def send_mail_v2(to, reservation):
     receivers = ['test@mailhog.local'] # some user who enters his email
 
     body_msg = "You have reserved rooms with success"
- 
+    # hotel name -> reservation.hotelroom.hotel.name
     header = "Dear " + reservation.first_name + reservation.last_name + "\n Thanks for reservation \n here are your reservation data: "
-    body = "Check in : " + reservation.begin_at + "\n" + "Check out: " + reservation.ends_at + "\n" + "Observations: " + reservation.observations + "\n\n" + "Enjoy!!"
+    body = "Check in : " + reservation.begin_at + "\n" + "Check out: " + reservation.ends_at + "\n" + "Observations: " + reservation.observations + "\n\n" + "Enjoy!!" 
 
     port = 1025
     msg = MIMEText(header + body)

@@ -25,19 +25,22 @@
       <li class="nav-item active">
         <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only"></span></a>
       </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="http://localhost:8025/">Mail <span class="sr-only"></span></a>
+      </li>
     </ul>
       <a class="nav-link" style="color:black;" href="#">Login </a>
 
   </div>
 </nav>
-
+{% comment %} 
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
     <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}
 </ul>
-{% endif %}
+{% endif %} {% endcomment %}
 
 
 <body>
