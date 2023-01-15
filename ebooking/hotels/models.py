@@ -26,7 +26,7 @@ class Hotel(models.Model):
 
 
 class HotelRoom(models.Model):
-    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE,related_name='hotel', null=True)
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE,related_name='hotelroom', null=True)
     image = models.ImageField(upload_to='hotelroom/', null=True)
     beds = models.IntegerField()
     has_terrace = models.BooleanField(default=True)
@@ -34,22 +34,7 @@ class HotelRoom(models.Model):
     has_tv = models.BooleanField(default=True)
     has_fridge = models.BooleanField(default=True)
     floor_no = models.PositiveIntegerField()
+    # price = models.PositiveIntegerField(default=100)
 
     class Meta:
         db_table = 'hotelroom'
-
-
-class Reservation(models.Model):
-    hotelRoom = models.ForeignKey(HotelRoom, on_delete=models.CASCADE, null=True) # oneToMany
-    begin_at = models.DateTimeField(null=False)
-    ends_at = models.DateTimeField(null=False)
-    time_in_days = models.PositiveIntegerField(null=False)
-    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
-    registered_at = models.DateTimeField(auto_now_add=True)
-    last_modified = models.DateTimeField(auto_now=True)
-
-    def __str__(self) -> str:
-        return self.name  
-
-    class Meta:
-        db_table = 'reservation'

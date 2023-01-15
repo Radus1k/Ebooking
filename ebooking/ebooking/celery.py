@@ -22,7 +22,7 @@ class CeleryConfig:
     timezone = 'Europe/Bucharest'
     broker_url = CELERY_RESULT_BACKEND
     backend_url = CELERY_RESULT_BACKEND
-    imports = ('hotels.tasks',)
+    imports = ('reservation.tasks',)
 
 
 app = Celery(namespace='ebooking')

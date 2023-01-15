@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.translation import gettext_lazy as _
+from .models import Reservation
 
 
 def send_mail(to, template, context):
@@ -11,7 +12,8 @@ def send_mail(to, template, context):
     msg.attach_alternative(html_content, 'text/html')
     msg.send()
 
-def send_mail_v2(to, hotelRooms):
+def send_mail_v2(to, reservation):
+    print("SEND MAIL RESERVATION OBJ: ",reservation)
     #!/usr/bin/python
 
     import smtplib
@@ -21,9 +23,12 @@ def send_mail_v2(to, hotelRooms):
     receivers = ['test@mailhog.local'] # some user who enters his email
 
     body_msg = "You have reserved rooms with success"
+ 
+    header = "Dear " + reservation.first_name + reservation.last_name + "\n Thanks for reservation \n here are your reservation data: "
+    body = "Check in : " + reservation.begin_at + "\n" + "Check out: " + reservation.ends_at + "\n" + "Observations: " + reservation.observations + "\n\n" + "Enjoy!!"
 
     port = 1025
-    msg = MIMEText('Thank you for the reservation')
+    msg = MIMEText(header + body)
 
     msg['Subject'] = 'Ebooking order'
     msg['From'] = sender

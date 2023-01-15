@@ -9,3 +9,4 @@ bootstrap4==0.1.0
 Pillow
 psycopg2-binary
 django-bootstrap4
+django-crispy-forms

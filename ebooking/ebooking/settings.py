@@ -47,10 +47,12 @@ INSTALLED_APPS = [
 
     # Vendor apps
     'bootstrap4',
+    'crispy_forms',
 
     # Ebooking apps
     'ebooking',
     'hotels',
+    'reservation',
 ]
 
 MIDDLEWARE = [

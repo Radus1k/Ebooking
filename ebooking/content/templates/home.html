@@ -7,7 +7,7 @@
 
 <body style="background-color:black;">
 <div class="flex-container">
-   
+
     {% for hotel in all_hotels %}
 
     <div class="hotel_rent">
@@ -22,20 +22,19 @@
                     <img src="{% static '/images/star.png' %}" style="display:inline-block; width:2em; height:2em";>
                 {% endfor %}
                 {% endwith %}
-                    
+
             </div>
-            <div style="padding: 15px; text-align: center;">Add a description of the image here</div>
         <div style="text-align:center;">
             <a href="{% url 'rentrooms' hotel.id %}" style="text-align:center;"><button type="button" class="btn btn-primary" style="display:no;">Check in</button> </a> 
         </div>
 
-        
+
 
     </div>  
-        
+
 </div>
-   
-        
+
+
     {% endfor %}
 
 </div>   

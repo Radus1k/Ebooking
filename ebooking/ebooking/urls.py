@@ -18,12 +18,14 @@ from django.urls import path
 from hotels.views import *
 from django.conf import settings
 from django.conf.urls.static import static
+from reservation.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name="home"), 
+    path('home', index, name="home"), 
     path('rentrooms/<int:hotel_id>/', rent_rooms, name="rentrooms"), 
-    path('add_hotel', add_hotel, name="add_hotel"),    
+    path('reservation/<int:room_id>/', reservation_view, name='reservation'),
 ]
 
 if settings.DEBUG:

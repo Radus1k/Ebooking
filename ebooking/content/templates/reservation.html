@@ -2,14 +2,15 @@
 
 {% load static %}
 
-{% block addhotel %}
+{% block reservation %}
 
-<link href="{% static 'css/add_hotel.css' %}" rel="stylesheet">
+<link href="{% static 'css/reservation.css' %}" rel="stylesheet">
 
 <body>
 <div class="flex-container" style="background-color:#ffcd74;border-color:black;width:60;margin-bottom:1em;margin-top:5%;width:50%;margin-left:13em;"> 
 
-    <form style="margin-left:15%" method="post" action="//submit.form" onSubmit="return validateForm();">
+    <form style="margin-left:15%" method="post" onSubmit="return validateForm();">
+        {% csrf_token %}
         
         <div style="max-width: 400px;"></div>
         <br>
