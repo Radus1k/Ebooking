@@ -1,0 +1,65 @@
+.four_hotels_vertically{
+    /*width:30%;
+    height: 200%;
+    margin:auto;
+    display: block;
+    */
+    display: flex-box;
+    grid-template-columns: auto auto auto auto;
+    gap: 20px;
+    background-color: #2196F3;
+    padding: 10px;
+    
+
+}
+
+
+.hotel_rent{
+/*
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid black;
+    text-align: center;
+    font-size: 30px;
+*/ 
+    background-color: bisque;
+    text-align: center;
+    
+    height:max-content;
+    text-align: center;
+    width:30%;
+    margin-top: 50px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+    margin-left: 50px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+    align-content: center;
+    /*
+    width: 100%;
+    height: 20%;
+    margin:auto;
+    font-size: 1.2em;
+    margin-bottom:2em;
+    */
+}
+
+.hotel_name{
+    padding-top: 5em;
+    font-family: "Californian FB", AppleMyungjo;
+}
+
+.hotel_stars{
+    display: inline-block;
+    margin-bottom: 10em;
+    text-align: center;
+}
+
+.hotel_img{
+    width: 90%;
+    height: 90%;
+    /*
+    height: 20em;
+    width: 20em;
+   */
+}

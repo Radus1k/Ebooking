@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block hotelrent %}
+
+<link href="{% static 'css/hotels.css' %}" rel="stylesheet">
+
+<body style="background-color:black;">
+<div class="flex-container">
+   
+    {% for hotel in all_hotels %}
+
+    <div class="hotel_rent">
+        <div class="hotel_name">
+            {{ hotel.name }}
+        </div>
+        <img src= "{{ hotel.image.url }}" class="hotel_img">
+
+            <div class="hotel_stars">
+                {% with ''|center:hotel.stars as range %}
+                {% for _ in range %}
+                    <img src="{% static '/images/star.png' %}" style="display:inline-block; width:2em; height:2em";>
+                {% endfor %}
+                {% endwith %}
+                    
+            </div>
+            <div style="padding: 15px; text-align: center;">Add a description of the image here</div>
+        <div style="text-align:center;">
+            <a href="{% url 'rentrooms' hotel.id %}" style="text-align:center;"><button type="button" class="btn btn-primary" style="display:no;">Check in</button> </a> 
+        </div>
+
+        
+
+    </div>  
+        
+</div>
+   
+        
+    {% endfor %}
+
+</div>   
+</body>
+
+
+{% endblock %}

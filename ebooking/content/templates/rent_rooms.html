@@ -1,0 +1,85 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block roomrent %}
+
+<link href="{% static 'css/rent_rooms.css' %}" rel="stylesheet">
+<link href="{% static 'css/js_script' %}" >
+<body>
+
+    <div class="container">
+        {% for room in hotelrooms %}
+        <!-- Left Column / Headphones Image -->
+        
+        <div class="left-column">
+
+            
+            <img src="{{ room.image.url }}" alt="img">
+            
+               
+            
+        </div>
+        
+
+      
+        <!-- Right Column -->
+        <div class="right-column">
+       
+              <!-- Room Description -->
+              <div class="product-description">
+              
+            <h1> Hotelul {{ room.hotel }}</h1>
+                       
+              </div>
+       
+            <div class="product-price">
+                <h3>deține numeroase camere de înaltă calitate. Această cameră se află la etajul {{ room.floor_no }}. <br><br>
+                    &nbsp;  Pentru a vă putea odihni aveți la dispoziție {% if room.beds == 1 %} un pat. {% else %} {{room.beds}} paturi. {% endif %}   <br>    
+                     {% if room.has_terrace == True %}
+                      Vă oferim posibilitatea de a vă răcori seara pe terasa la un pahar de suc rece pe terasa dumneavoastră
+                    {% endif %} <br> <br>
+                 </h3>
+
+                
+              </div>
+
+              <div class="product-description"> </div>
+
+              <h4>DOTĂRI ADIȚIONALE:</h4>
+               
+              {% if room.has_kitchen == True %}
+                    <h4>Bucătărie.<br></h4>
+                  {% endif %}
+                    
+                  {% if room.has_tv == True %}
+                  <h4>Televizor SMART.<br></h4>
+                {% endif %}
+                    
+                {% if room.fridge == True %}
+                    <h4>Frigider.</h4>
+                  {% endif %}
+
+
+
+              <div class="product-description"></div>
+
+          <!-- Product Configuration -->
+          
+          
+          <!-- Product Pricing -->
+          <div class="product-price">
+            <span>Pret:  LEI </span>
+            <a href="#" class="cart-btn">REZERVA CAMERA</a>
+          </div>
+        </div>
+
+        {% empty %}
+    </div>
+
+    {% endfor %}
+
+</div>
+</body>   
+
+{% endblock %}
