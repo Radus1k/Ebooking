@@ -9,7 +9,8 @@
         "has_kitchen": true,
         "beds": 1,
         "has_tv": true,
-        "floor_no": 1
+        "floor_no": 1,
+        "price": 1300
       }
     },
     {
@@ -22,7 +23,8 @@
           "has_terrace": true,
           "has_kitchen": true,
           "has_tv": true,
-          "floor_no": 1
+          "floor_no": 1,
+          "price": 1080
         }
       },
       {
@@ -35,7 +37,8 @@
           "has_terrace": true,
           "has_kitchen": true,
           "has_tv": true,
-          "floor_no": 1
+          "floor_no": 1,
+          "price": 200
         }
       },
       {
@@ -48,7 +51,8 @@
           "has_terrace": true,
           "has_kitchen": true,
           "has_tv": true,
-          "floor_no": 1
+          "floor_no": 1,
+          "price": 500
         }
       }
   ]

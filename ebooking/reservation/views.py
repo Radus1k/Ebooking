@@ -20,8 +20,7 @@ def reservation_view(request, room_id):
         check_out = request.POST['data_7']
         observations = request.POST['data_10']
 
-        reservation = Reservation(hotelRoom = hotelRoom,begin_at=check_in, ends_at=check_out, observations=observations,phone_number=phone_number, 
-        first_name=first_name, last_name=last_name)
+        reservation = Reservation(hotelRoom = hotelRoom, begin_at=check_in, ends_at=check_out, observations=observations,phone_number=phone_number, first_name=first_name, last_name=last_name)
         reservation.save()
 
         async_send_mail.delay(to=email, reservation_id=reservation.id)

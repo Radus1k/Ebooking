@@ -56,7 +56,6 @@
                   {% endif %}
 
 
-
               <div class="product-description"></div>
 
           <!-- Product Configuration -->
@@ -64,7 +63,7 @@
           
           <!-- Product Pricing -->``
           <div class="product-price">
-            <span>Pret:100 LEI </span>
+            <span>Pret: {{ room.price }} LEI </span>
             <a href="{% url 'reservation' room.id %}" class="cart-btn">REZERVA CAMERA</a>
           </div>
         </div>

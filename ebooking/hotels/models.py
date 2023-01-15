@@ -34,7 +34,7 @@ class HotelRoom(models.Model):
     has_tv = models.BooleanField(default=True)
     has_fridge = models.BooleanField(default=True)
     floor_no = models.PositiveIntegerField()
-    # price = models.PositiveIntegerField(default=100)
+    price = models.PositiveIntegerField(default=100, null=True)
 
     class Meta:
         db_table = 'hotelroom'

@@ -19,7 +19,7 @@ def send_mail_v2(to, reservation):
     import smtplib
     from email.mime.text import MIMEText
 
-    sender = 'test@mailhog.local'
+    sender = 'order@ebooking.local'
     receivers = ['test@mailhog.local'] # some user who enters his email
 
     body_msg = "You have reserved rooms with success"

@@ -4,3 +4,7 @@
 *.pyc 
 /*/migrations/*
 ebooking/secrets.json
+ebooking/hotels/migrations
+ebooking/hotels/migrations/*
+ebooking/reservation/migrations/*
+ebooking/reservation/migrations
