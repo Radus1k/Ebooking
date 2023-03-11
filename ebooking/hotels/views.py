@@ -8,6 +8,11 @@ def index(request):
     context = {"all_hotels": all_hotel_objs}
     return render(request, "home.html", context=context)
 
+def hotel_view(request, hotel_id):
+     hotel_instance = Hotel.objects.get(id=hotel_id)
+     context = {"hotel_data":hotel_instance}
+     return render(request, "hotel.html", context=context)
+
 
 def rent_rooms(request, hotel_id):
     hotel_instance = Hotel.objects.get(id=hotel_id)

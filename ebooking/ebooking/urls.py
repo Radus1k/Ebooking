@@ -26,6 +26,7 @@ urlpatterns = [
     path('home', index, name="home"), 
     path('rentrooms/<int:hotel_id>/', rent_rooms, name="rentrooms"), 
     path('reservation/<int:room_id>/', reservation_view, name='reservation'),
+    path('hotel/<int:hotel_id>/', hotel_view, name='hotel'),
 ]
 
 if settings.DEBUG:

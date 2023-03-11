@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block hotel %}
+
+<link href="{% static 'css/hotel_info.css' %}" rel="stylesheet">
+
+<div class="flex-container">
+
+    <table class="table">
+        {% for label, value in hotel_data.get_fields %}
+            <tr>
+                <td>{{ label }}</td>
+                <td>{{ value }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+</div>   
+</body>
+
+{% endblock %}
