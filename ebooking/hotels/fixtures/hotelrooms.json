@@ -1,0 +1,58 @@
+[
+    {
+      "model": "hotels.HotelRoom",
+      "pk": 1,
+      "fields": {
+        "hotel": "1",
+        "image": "/hotelrooms_photos/grand_room.jpg",
+        "has_terrace": true,
+        "has_kitchen": true,
+        "beds": 1,
+        "has_tv": true,
+        "floor_no": 1,
+        "price": 1300
+      }
+    },
+    {
+        "model": "hotels.HotelRoom",
+        "pk": 2,
+        "fields": {
+          "hotel": "2",
+          "image": "/hotelrooms_photos/marriot_room.jpg",
+          "beds": 1,
+          "has_terrace": true,
+          "has_kitchen": true,
+          "has_tv": true,
+          "floor_no": 1,
+          "price": 1080
+        }
+      },
+      {
+        "model": "hotels.HotelRoom",
+        "pk": 3,
+        "fields": {
+          "hotel": "3",
+          "image": "/hotelrooms_photos/hotel_room.jpg",
+          "beds": 1,
+          "has_terrace": true,
+          "has_kitchen": true,
+          "has_tv": true,
+          "floor_no": 1,
+          "price": 200
+        }
+      },
+      {
+        "model": "hotels.HotelRoom",
+        "pk": 4,
+        "fields": {
+          "hotel": "4",
+          "image": "/hotelrooms_photos/resort_room.jpg",
+          "beds": 1,
+          "has_terrace": true,
+          "has_kitchen": true,
+          "has_tv": true,
+          "floor_no": 1,
+          "price": 500
+        }
+      }
+  ]

@@ -1,0 +1,28 @@
+FROM python:3.10.9-buster
+
+
+WORKDIR /usr/src/app
+
+# Solve OS dependencies
+RUN apt update 
+RUN apt install -y gcc musl-dev build-essential
+RUN mkdir -p /usr/share/man/man1
+RUN dpkg --configure -a
+RUN apt-get install -f
+RUN apt update
+
+# Copy project files
+COPY ebooking/ /usr/src/app/
+
+# Copy entrypoint script to container
+COPY docker/entrypoint_celery.sh /usr/src/app/entrypoint_celery.sh
+# Solve Python dependencies
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+CMD pwd
+RUN sed -i -e 's/\r$//' entrypoint_celery.sh
+
+
+# Run entrypoint script
+ENTRYPOINT ["./docker/entrypoint_celery.sh"]

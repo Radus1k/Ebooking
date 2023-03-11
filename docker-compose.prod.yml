@@ -1,0 +1,2 @@
+# Coming soon. Should create a nginx container, and all static files should be served by nginx
+# ** python manage.py collectstatic -> copy that folder to nginx contaienr
