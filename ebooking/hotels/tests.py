@@ -55,11 +55,18 @@ class HotelModelTest(TestCase):
             city="Bucharest",
             region="Muntenia",
             country="RO",
+            rooms=10,
             parking_places=50,
             restaurant_places=1,
             floors = 5,
             zone="IF",
         )
-        self.assertEqual(hotel.rooms, 1)
+
         self.assertEqual(hotel.has_wifi, True)
-        self.assertEqual(hotel.has_breakfast, False)    
+        self.assertEqual(hotel.has_breakfast, False) 
+
+    def test_hotel_delete(self):
+        hotel = Hotel.objects.get(name="Rin")
+        hotel.delete()
+        with self.assertRaises(Hotel.DoesNotExist):
+            Hotel.objects.get(name="Rin")       

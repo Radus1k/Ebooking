@@ -11,7 +11,7 @@ class Hotel(models.Model):
     region = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
     zone = models.CharField(max_length=50)
-    rooms = models.PositiveIntegerField(default=1) # Maybe add some default values 
+    rooms = models.PositiveIntegerField() 
     floors = models.PositiveIntegerField() # Maybe add some default values 
     parking_places = models.PositiveIntegerField() # Maybe add some default values 
     restaurant_places = models.PositiveIntegerField() # Maybe add some default values 
