@@ -22,6 +22,7 @@ BASE_DIR = dirname(dirname(os.path.abspath(__file__)))
 CONTENT_DIR = os.path.join(BASE_DIR, 'content')
 
 RUN_DOCKERIZED = os.environ.get('RUN_DOCKERIZED')
+IS_PRODUCTION = os.environ.get('IS_PRODUCTION')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -99,14 +100,37 @@ DATABASES = {
         'USER': os.environ.get('POSTGRES_USER'),
         'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
         'TIME_ZONE': 'Europe/Bucharest',
-        'HOST': 'db_postgres',
-        'PORT': '5432'
-    } if RUN_DOCKERIZED else {
+        'HOST': 'local_db1',
+        'PORT': '5432',
+    },
+     'secondary': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_NAME'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'TIME_ZONE': 'Europe/Bucharest',
+        'HOST': 'local_db2',
+        'PORT': '5433'}
+    } if RUN_DOCKERIZED and IS_PRODUCTION else {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'TIME_ZONE': 'Europe/Bucharest'
+
+    if RUN_DOCKERIZED and not IS_PRODUCTION else {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_NAME'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'TIME_ZONE': 'Europe/Bucharest',
+        'HOST': 'db_postgres',
+        'PORT': '5432'    
+        }
     }
 }
+
+print("DATABASE: ", DATABASES)
+print("IS PRODUCTION: ",IS_PRODUCTION, "RUN DOCKERIZED: ", RUN_DOCKERIZED)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

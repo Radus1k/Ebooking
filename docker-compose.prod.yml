@@ -1,2 +1,167 @@
-# Coming soon. Should create a nginx container, and all static files should be served by nginx
-# ** python manage.py collectstatic -> copy that folder to nginx contaienr
+version: '3.3'
+
+volumes:
+  pgdata:
+  pgadmin:
+
+services:
+  django_dev:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dev.django
+    expose:
+      - 1025
+      - 8025
+      - 587  
+    ports:
+      - "0.0.0.0:8000:8000"
+    volumes:
+      - .:/usr/src/app/
+      - /tmp:/tmp
+    hostname: django_dev
+    environment:
+      - RUN_DOCKERIZED=1
+      - IS_PRODUCTION=1
+      - PYTHONDONTWRITEBYTECODE=1
+      - PYTHONUNBUFFERED=1
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    container_name: django_dev
+    depends_on:
+      - local_db1
+      - local_db2
+      # - celery_beat
+      # - celery_worker
+
+  # celery_beat:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/Dockerfile.celery
+  #   command: celery -A ebooking.celery beat
+  #   volumes:
+  #     - .:/usr/src/app
+  #   hostname: celery_beat
+  #   container_name: celery_beat
+  #   environment:
+  #     - RUN_DOCKERIZED=1
+  #     - PYTHONDONTWRITEBYTECODE=1
+  #     - PYTHONUNBUFFERED=1
+  #     - POSTGRES_NAME=postgres
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+
+  #   depends_on:
+  #     - celery_worker
+
+  # celery_worker:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/Dockerfile.celery
+  #   command: celery -A ebooking.celery worker
+  #   volumes:
+  #     - .:/usr/src/app
+  #     - /tmp:/tmp
+  #   hostname: celery_worker
+  #   container_name: celery_worker
+  #   environment:
+  #     - RUN_DOCKERIZED=1
+  #     - PYTHONDONTWRITEBYTECODE=1
+  #     - PYTHONUNBUFFERED=1
+  #     - POSTGRES_NAME=postgres
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #   depends_on:
+  #     - redis
+  #     - db_postgres
+
+  # redis:
+  #   tty: true
+  #   build:
+  #     context: .
+  #     dockerfile: docker/Dockerfile.redis
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - /tmp:/tmp
+  #   hostname: redis
+  #   container_name: redis
+  #   environment:
+  #     - ALLOW_EMPTY_PASSWORD=yes
+  #     - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
+  #   restart: on-failure
+
+  db_pgadmin:
+    image: dpage/pgadmin4
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - "127.0.0.1:8001:80"
+    container_name: db_pgadmin
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=postgres
+    depends_on:
+      - local_db1
+      - local_db2
+
+  local_db1:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.local_db1
+    volumes:
+      - ./data/local_db1:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: hotelsdb
+      TZ: Europe/Bucharest
+      PGTZ: Europe/Bucharest
+      PGDATA: /var/lib/postgresql/data/pgdata
+    restart: unless-stopped
+    hostname: local_db1
+    container_name: local_db1
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5     
+
+  local_db2:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.local_db2
+    volumes:
+      - ./data/local_db2:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+    environment:      
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: hotelsdb
+      TZ: Europe/Bucharest
+      PGTZ: Europe/Bucharest
+      POSTGRES_NAME: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+    restart: unless-stopped  
+    hostname: local_db2
+    container_name: local_db2
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5     
+    
+
+  
+  # test_email_server:
+  #   image: mailhog/mailhog
+  #   ports:
+  #     - "1025:1025"
+  #     - "8025:8025"
+  #   depends_on:
+  #   - django_dev
