@@ -119,6 +119,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: hotelsdb
+      POSTGRES_HOST: local_db1
+      POSTGRES_PORT: 5432
       TZ: Europe/Bucharest
       PGTZ: Europe/Bucharest
       PGDATA: /var/lib/postgresql/data/pgdata
@@ -143,6 +145,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: hotelsdb
+      POSTGRES_HOST: local_db2
+      POSTGRES_PORT: 5432
       TZ: Europe/Bucharest
       PGTZ: Europe/Bucharest
       POSTGRES_NAME: postgres

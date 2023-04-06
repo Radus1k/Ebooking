@@ -2,39 +2,30 @@
 
 set -e
 
-# Create a new user with limited privileges
-useradd -ms /bin/bash postgres_user
-chown -R postgres_user:postgres_user /var/lib/postgresql/data
+# CREATE EXTENSION IF NOT EXISTS pglogical;
+# SELECT pglogical.create_node(node_name := 'local_node', dsn := 'host=localhost port=5432 dbname=local_db1 user=postgres password=postgres');
+# SELECT pglogical.create_subscription(subscription_name := 'hotels_subscription_db2', provider_dsn := 'host=34.175.108.166 port=5432 dbname=hotelsdb user=postgres password=postgres', replication_sets := ARRAY['replication_hotelsdb'], synchronize_structure := true, synchronize_data := true);
 
-# Start PostgreSQL server as postgres_user
-exec gosu postgres_user postgres -D /var/lib/postgresql/data \
-    -c listen_addresses='*' \
-    -c max_replication_slots=10 \
-    -c shared_preload_libraries='pglogical' \
-    -c wal_level=logical \
-    -c max_wal_senders=10 \
-    -c max_worker_processes=10 \
-    -c max_connections=500 \
-    -c synchronous_commit=off \
-    -c max_standby_streaming_delay=-1 \
-    -c hot_standby=on
+echo "Postgres host: "
+echo $POSTGRES_HOST
 
-# Wait for PostgreSQL to start
-until pg_isready
-do
-    sleep 1s
-done
+echo "Postgres db: "
+echo $POSTGRES_DB
 
-# Create database if it doesn't exist
-if ! gosu postgres psql -lqt | cut -d \| -f 1 | grep -qw hotelsdb; then
-    gosu postgres psql -c "CREATE DATABASE hotelsdb;"
-fi
+echo "Postgres port: "
+echo $POSTGRES_PORT
 
-# Create schema if it doesn't exist
-gosu postgres psql -c "CREATE SCHEMA IF NOT EXISTS hotelsdb;" hotelsdb
+# # Wait for the PostgreSQL server to start up
+# until pg_isready -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" -d "$POSTGRES_DB" -U "$POSTGRES_USER"; do
+#   echo "Waiting for database server to start up..."
+#   sleep 1
+# done
 
-# Create replication set on local database
-gosu postgres psql -c "SELECT pglogical.create_replication_set('my_replication_set', true, 'public.users');" hotelsdb
+# # Enable pglogical extension
+# psql -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" -d "$POSTGRES_DB" -U "$POSTGRES_USER" -c "CREATE EXTENSION IF NOT EXISTS pglogical;"
 
-# Create subscription to global database on local database
-gosu postgres psql -c "SELECT pglogical.create_subscription('my_subscription', 'dbname=hotelsdb host=34.175.108.166 user=postgres password=postgres', '{my_replication_set}');" hotelsdb
+# # Create a node for the local PostgreSQL container
+# psql -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" -d "$POSTGRES_DB" -U "$POSTGRES_USER" -c "SELECT pglogical.create_node(node_name := 'local_node', dsn := 'host=localhost port=5432 dbname=local_db1 user=postgres password=postgres');"
+
+# # Create a subscription to the GCP PostgreSQL instance
+# psql -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" -d "$POSTGRES_DB" -U "$POSTGRES_USER" -c "SELECT pglogical.create_subscription(subscription_name := 'hotels_subscription_db2', provider_dsn := 'host=34.175.108.166 port=5432 dbname=hotelsdb user=postgres password=postgres', replication_sets := ARRAY['replication_hotelsdb'], synchronize_structure := true, synchronize_data := true);"

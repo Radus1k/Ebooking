@@ -10,8 +10,9 @@ RUN apt-get -y install postgresql-14-pglogical
 #     && echo "max_wal_senders = 10" >> /usr/share/postgresql/14/postgresql.conf.sample \
 #     && echo "host replication all 0.0.0.0/0 trust" >> /usr/share/postgresql/14/pg_hba.conf.sample
 
-# # Copy the script to the container
-# COPY docker/entrypoint_localdb_2.sh /docker-entrypoint-initdb.d/
+# Copy the script to the container
+COPY docker/entrypoint_localdb_2.sh /docker-entrypoint-initdb.d/
 
-# # Set the script to executable
-# RUN chmod +x /docker-entrypoint-initdb.d/entrypoint_localdb_2.sh
+# Set the script to executable
+RUN chmod +x /docker-entrypoint-initdb.d/entrypoint_localdb_2.sh
+# ENTRYPOINT ["/docker-entrypoint-initdb.d/entrypoint_localdb_2.sh"]
