@@ -1,7 +1,9 @@
 FROM postgres:latest
 
 RUN apt-get update
-RUN apt-get -y install postgresql-14-pglogical
+RUN apt-get -y install postgresql-15-pglogical
+RUN apt-get -y install postgresql-contrib-15
+
 
 # # Initialize replication configuration
 # RUN echo "shared_preload_libraries = 'pglogical'" >> /usr/share/postgresql/14/postgresql.conf.sample \
