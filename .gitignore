@@ -9,3 +9,4 @@ ebooking/hotels/migrations/*
 ebooking/reservation/migrations/*
 ebooking/reservation/migrations
 data/
+data/*
