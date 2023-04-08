@@ -1,11 +1,16 @@
+{% extends 'base.html' %}
+
+{% load django_bootstrap5 %}
+
 
 {% block login %}
-<h1>Login</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-</form>
-<p> Don't have an account? Register here
-    <a href="{% url 'accounts:register' %} "> Inregistreaza-te</a>       
+  <h1 class="mb-4">Login</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+  <p class="mt-3"> Don't have an account? Register here
+    <a href="{% url 'accounts:register' %} " class="btn btn-secondary"> Inregistreaza-te</a>       
+  </p>
 {% endblock %}

@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 
+{% load django_bootstrap5 %}
+
 {% block register %}
 <h1>Register</h1>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
+    {% bootstrap_form form %}
+    <button type="submit" class="btn btn-primary">Register</button>
 </form>
 {% endblock %}

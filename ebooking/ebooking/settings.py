@@ -50,8 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Vendor apps
-    'bootstrap4',
-    'crispy_forms',
+    'django_bootstrap5',
 
     # Ebooking apps
     'ebooking',
@@ -133,6 +132,8 @@ DATABASES = {
      }
 } 
 
+
+print("DATABASES: ", DATABASES)
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 

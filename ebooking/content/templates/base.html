@@ -1,10 +1,11 @@
 {% load static %}
-{% load bootstrap4 %}
+
+{% load django_bootstrap5 %}
 
 {% bootstrap_css %}
-{% bootstrap_javascript jquery='full' %}
 
-{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_javascript %}
+
 {% bootstrap_messages %}
 
 
@@ -31,9 +32,9 @@
       </ul>
     {% endif %}
       {% if not request.user.is_authenticated %}
-        <a class="nav-link" style="color:black;" href="{% url 'accounts:log_in' %}">Login </a>
+        <a class="nav-link" style="color:black; margin-right:2; margin-left: auto; margin-right:2em;" href="{% url 'accounts:log_in' %}">Login </a>
       {% else %}
-        Hi<a class="nav-link" style="color:black;" href="{% url 'accounts:log_out' %}">Logout </a>
+        Hi<a class="nav-link" style="color:black; margin-right:2; margin-left: auto; margin-right:2em;" href="{% url 'accounts:log_out' %}">Logout </a>
       {% endif %}
     </div>
   </nav>
