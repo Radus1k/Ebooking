@@ -36,6 +36,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+LOGIN_REDIRECT_URL ='/'
+LOGOUT_REDIRECT_URL  ='accounts:log_in'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -54,6 +57,7 @@ INSTALLED_APPS = [
     'ebooking',
     'hotels',
     'reservation',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -93,8 +97,23 @@ TEMPLATES = [
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+
+print("********** IS PRODUCTION: ",IS_PRODUCTION, "***************RUN DOCKERIZED: ", RUN_DOCKERIZED)
+
+
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_NAME'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'TIME_ZONE': 'Europe/Bucharest',
+        'HOST': 'db_postgres',
+        'PORT': '5432'    
+        }
+    
+     if RUN_DOCKERIZED and not IS_PRODUCTION else {
+       'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('POSTGRES_NAME'),
         'USER': os.environ.get('POSTGRES_USER'),
@@ -111,26 +130,8 @@ DATABASES = {
         'TIME_ZONE': 'Europe/Bucharest',
         'HOST': 'local_db2',
         'PORT': '5433'}
-    } if RUN_DOCKERIZED and IS_PRODUCTION else {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'TIME_ZONE': 'Europe/Bucharest'
-
-    if RUN_DOCKERIZED and not IS_PRODUCTION else {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_NAME'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'TIME_ZONE': 'Europe/Bucharest',
-        'HOST': 'db_postgres',
-        'PORT': '5432'    
-        }
-    }
-}
-
-print("DATABASE: ", DATABASES)
-print("IS PRODUCTION: ",IS_PRODUCTION, "RUN DOCKERIZED: ", RUN_DOCKERIZED)
+     }
+} 
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

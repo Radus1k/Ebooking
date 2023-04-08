@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseForbidden
 from hotels.models import Hotel, HotelRoom
+from django.urls import reverse_lazy
 
 
 def index(request):
+    if not request.user.is_authenticated:
+        return redirect(reverse_lazy('accounts:log_in'))
     all_hotel_objs = Hotel.objects.all()
     context = {"all_hotels": all_hotel_objs}
     return render(request, "home.html", context=context)
