@@ -27,6 +27,7 @@ urlpatterns = [
     path('', index, name="home"), 
     path('home', index, name="home"), 
     path('rentrooms/<int:hotel_id>/', rent_rooms, name="rentrooms"), 
+     path('editrooms/<int:hotel_id>/', edit_rooms, name="editrooms"), 
     path('reservation/<int:room_id>/', reservation_view, name='reservation'),
     path('accounts/', include('accounts.urls')),
 ]

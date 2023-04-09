@@ -166,6 +166,7 @@ USE_TZ = True
 
 
 
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 # EMAIL_HOST = 'localhost'
@@ -178,6 +179,13 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_HOST_USER = ''
 
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+USE_REMEMBER_ME = False
+
+SIGN_UP_FIELDS = ['first_name', 'last_name', 'email', 'password1', 'password2']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/

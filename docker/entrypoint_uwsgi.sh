@@ -11,6 +11,4 @@ python manage.py loaddata hotelrooms
 
 
 
-uwsgi --ini labmalware_uwsgi.ini
-
 exec "$@"
