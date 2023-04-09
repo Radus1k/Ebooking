@@ -110,12 +110,12 @@ export PGPASSWORD=postgres
 #   psql -c "SELECT pglogical.create_node(node_name := 'local_db1_node', dsn := 'host=localhost port=5432 dbname=local_db1 user=postgres password=postgres password=$PGPASSWORD');"
 # fi
 
-# # psql -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" -d "$POSTGRES_DB" -U "$POSTGRES_USER" -c "SELECT pglogical.create_subscription(subscription_name := 'subscription_hotelsdb_subscriber1', provider_dsn := 'host=34.175.108.166 port=5432 dbname=hotelsdb user=postgres', replication_sets := ARRAY['replication_hotelsdb'], synchronize_structure := true, synchronize_data := true, forward_origins := '{}', apply_delay := '0 seconds'::interval, subscriber_node_names := ARRAY['subscriber1']);";
+# # psql -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" -d "$POSTGRES_DB" -U "$POSTGRES_USER" -c "SELECT pglogical.create_subscription(subscription_name := 'subscription_hotelsdb_subscriber1', provider_dsn := 'host=ENV_VRBL port=5432 dbname=hotelsdb user=postgres', replication_sets := ARRAY['replication_hotelsdb'], synchronize_structure := true, synchronize_data := true, forward_origins := '{}', apply_delay := '0 seconds'::interval, subscriber_node_names := ARRAY['subscriber1']);";
 
 # # Create a node for the local PostgreSQL container
 
 # # Create a subscription to the GCP PostgreSQL instance
-# psql -c "SELECT pglogical.create_subscription(subscription_name := 'hotels_subscription_db1', provider_dsn := 'host=34.175.108.166 port=5432 dbname=hotelsdb user=postgres password=postgres', replication_sets := ARRAY['replication_hotelsdb'], synchronize_structure := true, synchronize_data := true);";
+# psql -c "SELECT pglogical.create_subscription(subscription_name := 'hotels_subscription_db1', provider_dsn := 'host=ENV_VRBL port=5432 dbname=hotelsdb user=postgres password=postgres', replication_sets := ARRAY['replication_hotelsdb'], synchronize_structure := true, synchronize_data := true);";
 
 
 # echo "Runned successfully";
