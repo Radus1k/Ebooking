@@ -9,8 +9,6 @@ RUN apt install -y gcc python3-dev build-essential libpq-dev
 # Copy project files
 COPY ebooking/ .
 
-# Copy uWSGI config file
-# COPY config/labmalware_uwsgi.ini /usr/src/app/labmalware_uwsgi.ini
 
 # Copy entrypoint script 
 COPY docker/entrypoint_dev_django.sh .

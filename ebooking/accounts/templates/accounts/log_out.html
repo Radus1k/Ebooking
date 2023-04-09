@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load i18n %}
+{% load static %}
+{% block content %}
+
+
+    <div class="container" style="color:white;">
+        <div class="row">
+            <div class="col-7 col-xs-8 col-sm-7 col-md-6 col-xl-6">
+                <div class="card">
+                    {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+                    <form class="box" style="border-radius: 25px;">
+                        <h4 style="color:white;">Ați fost deconectat</h4>
+
+                        <a class="forgot text-muted" href="{% url 'accounts:log_in' %}">{% trans 'Conectare' %}</a>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

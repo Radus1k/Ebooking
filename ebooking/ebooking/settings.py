@@ -38,6 +38,7 @@ ALLOWED_HOSTS = []
 
 LOGIN_REDIRECT_URL ='/'
 LOGOUT_REDIRECT_URL  ='accounts:log_in'
+LOGIN_URL ='/accounts/log-in/'
 
 # Application definition
 
@@ -50,8 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Vendor apps
-    'bootstrap4',
-    'crispy_forms',
+    'django_bootstrap5',
 
     # Ebooking apps
     'ebooking',
@@ -96,9 +96,6 @@ TEMPLATES = [
     },
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-
-print("********** IS PRODUCTION: ",IS_PRODUCTION, "***************RUN DOCKERIZED: ", RUN_DOCKERIZED)
 
 
 DATABASES = {
@@ -165,6 +162,7 @@ USE_TZ = True
 
 
 
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 # EMAIL_HOST = 'localhost'
@@ -177,6 +175,13 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_HOST_USER = ''
 
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+USE_REMEMBER_ME = False
+
+SIGN_UP_FIELDS = ['first_name', 'last_name', 'email', 'password1', 'password2']
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/

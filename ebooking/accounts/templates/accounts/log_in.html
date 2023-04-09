@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block login %}
+
+{% load django_bootstrap5 %}
+
+{% bootstrap_css %}
+
+{% bootstrap_javascript %}
+{% comment %} 
+{% bootstrap_messages %} {% endcomment %}
+
+    <link href="{% static 'css/login.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css"/>
+
+    <body>
+    <div class="container" style="color:white; padding-top: 4%">
+        <div class="row">
+            <div class="col-7 col-xs-8 col-sm-7 col-md-6 col-xl-6" style="color:white;">
+                <div class="card">
+                    {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger">
+                                    {#                              TODO: Templatetag ca sa se afiseze cum trebuie mesajul de eroare#}
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+
+                    <form class="box" method="post" style="padding-top: 5%; padding-bottom: 10%;">
+                        {% csrf_token %}
+                        <h2>Autentificare</h2>
+                        <p class="text-muted">Vă rugăm introduceți datele pentru autentificare.</p>
+
+                        {% bootstrap_form form %}
+
+                        <p>
+                            <i class="bi bi-eye-slash" id="togglePassword"></i>
+                        </p>
+
+                        <ul style="list-style-type: none; text-align: center; padding: 0 0 0 0;">
+                            <li>
+                                <a class="btn btn-secondary" href="{% url 'accounts:sign_up' %}">Creare cont</a>
+                            </li>
+                            <li>
+                                <a class="btn btn-secondary" href="{% url 'accounts:restore_password' %}">Resetare
+                                    parolă</a>
+                            </li>
+                        </ul>
+                        <hr>
+
+                        <button type="submit" class="bn5" aria-pressed="true">Conectare</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+

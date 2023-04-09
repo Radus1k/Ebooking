@@ -13,7 +13,6 @@ def send_mail(to, template, context):
     msg.send()
 
 def send_mail_v2(to, reservation):
-    print("SEND MAIL RESERVATION OBJ: ",reservation)
     #!/usr/bin/python
 
     import smtplib

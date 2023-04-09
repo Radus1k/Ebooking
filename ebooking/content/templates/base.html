@@ -1,10 +1,11 @@
 {% load static %}
-{% load bootstrap4 %}
+
+{% load django_bootstrap5 %}
 
 {% bootstrap_css %}
-{% bootstrap_javascript jquery='full' %}
 
-{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_javascript %}
+
 {% bootstrap_messages %}
 
 
@@ -31,9 +32,10 @@
       </ul>
     {% endif %}
       {% if not request.user.is_authenticated %}
-        <a class="nav-link" style="color:black;" href="{% url 'accounts:log_in' %}">Login </a>
+        <a class="nav-link" style="color:black; margin-right:2; margin-left: auto; margin-right:0em;" href="{% url 'accounts:log_in' %}">Login </a>
       {% else %}
-        Hi<a class="nav-link" style="color:black;" href="{% url 'accounts:log_out' %}">Logout </a>
+     
+      <a style="padding-right:20px; margin-right:2; margin-left: auto; margin-right:3em;" >Hi, {{ request.user.first_name}} {{ request.user.last_name }}  </a> <a class="nav-link" style="color:black; padding-right:1em; " href="{% url 'accounts:log_out' %}">  Logout </a>
       {% endif %}
     </div>
   </nav>
@@ -65,7 +67,19 @@
   {% block login %}
   {% endblock %}
 
-  {% block register %}
+  {% block signup %}
+  {% endblock %}
+
+  {% block changeprofile %}
+  {% endblock %}
+
+  {% block changepassword %}
+  {% endblock %}
+
+  {% block restore_password %}
+  {% endblock %}
+  
+  {% block restore_password_confirm %}
   {% endblock %}
 
 </body>
