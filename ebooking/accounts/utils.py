@@ -26,13 +26,8 @@ def send_reset_password_email(request, email, token, uid):
     }
 
     port = 1025
-    msg = MIMEText(header + body)
-
-    msg['Subject'] = 'Ebooking order'
-    msg['From'] = sender
-    msg['To'] = to
     
-    print("Sending mail...")
+    print("Sending reset password mail...")
 
     with smtplib.SMTP('host.docker.internal', port) as server:
 

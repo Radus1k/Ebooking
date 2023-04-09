@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseForbidden
 from hotels.models import Hotel, HotelRoom
 from django.contrib.auth.decorators import login_required
+from .forms import HotelRoomForm
 from django.urls import reverse_lazy
 
 def index(request):
@@ -38,9 +39,14 @@ def edit_rooms(request, hotel_id):
 
     if not hotel_instance:
         return HttpResponseForbidden
+    form = HotelRoomForm()
+    if request.method == "POST":
+        completed_form = HotelRoomForm(request.POST)
 
-    hotelRooms = HotelRoom.objects.filter(hotel=hotel_id)
-    context ={"hotelrooms": hotelRooms}
+        if completed_form.is_valid():
+            completed_form.save()        
+    hotelRooms = HotelRoom.objects.filter(hotel=hotel_id)        
+    context ={"form": form, "hotelrooms":hotelRooms}
 
     return render(request, template_name='edit_rooms.html', context=context)
 
