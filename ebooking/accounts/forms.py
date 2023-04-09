@@ -53,12 +53,13 @@ class SignInViaEmailForm(SignIn):
 
     def __init__(self, *args, **kwargs):
         super(SignInViaEmailForm, self).__init__(*args, **kwargs)
+        print("init sign in via form")
         # self.fields['email'].widget.attrs['placeholder'] = "Introduceti emailul..."
 
     def clean_email(self):
         email = self.cleaned_data['email']
-
         user = User.objects.filter(email__iexact=email).first()
+       
         if not user:
             raise ValidationError(_(INVALID_CREDS_MSG))
 
@@ -154,9 +155,9 @@ class RestorePasswordViaEmailOrUsernameForm(UserCacheMixin, forms.Form):
 
         return email_or_username
 
-
+ 
 class ChangeProfileForm(forms.Form):
-    phone_number = forms.CharField(max_length=20, required=False)
+    phone = forms.CharField(max_length=20, required=False)
 
     def __init__(self, *args, **kwargs):
         super(ChangeProfileForm, self).__init__(*args, **kwargs)

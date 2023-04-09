@@ -26,6 +26,7 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import View, FormView
 from django.shortcuts import render
 from django.conf import settings
+import random
 
 from .models import Profile
 from .utils import send_reset_password_email         
@@ -79,7 +80,7 @@ class LogInView(GuestOnlyView, FormView):
 
     def form_invalid(self, form):
         show_signup_errors(self.request, form)
-        return redirect(settings.LOGIN_REDIRECT_URL)
+        return redirect(settings.LOGIN_URL)
 
 
 def show_signup_errors(request, form):
@@ -160,14 +161,14 @@ class ChangeProfileView(LoginRequiredMixin, FormView):
     def get_initial(self):
         user = self.request.user
         initial = super().get_initial()
-        initial['phone_number'] = user.profile.phone_number
+        initial['phone'] = user.profile.phone
 
         return initial
 
     def form_valid(self, form):
         user = self.request.user
 
-        user.profile.phone_number = form.cleaned_data['phone_number']
+        user.profile.phone = form.cleaned_data['phone']
         user.profile.save()
 
         messages.success(self.request, _('Preferințele dumneavoastră au fost actualizate.'))

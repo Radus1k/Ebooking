@@ -48,7 +48,7 @@
 
 # # CREATE EXTENSION IF NOT EXISTS pglogical;
 # # SELECT pglogical.create_node(node_name := 'local_node', dsn := 'host=localhost port=5432 dbname=local_db1 user=postgres password=postgres');
-# # SELECT pglogical.create_subscription(subscription_name := 'hotels_subscription_db2', provider_dsn := 'host=34.175.108.166 port=5432 dbname=hotelsdb user=postgres password=postgres', replication_sets := ARRAY['replication_hotelsdb'], synchronize_structure := true, synchronize_data := true);
+# # SELECT pglogical.create_subscription(subscription_name := 'hotels_subscription_db2', provider_dsn := 'host=ENV port=5432 dbname=hotelsdb user=postgres password=postgres', replication_sets := ARRAY['replication_hotelsdb'], synchronize_structure := true, synchronize_data := true);
 
 # echo "shared_preload_libraries = 'pglogical'" >> /var/lib/postgresql/data/postgresql.conf
 
@@ -82,7 +82,7 @@ export PGPASSWORD=postgres
 
 # # psql  -c "alter system set shared_preload_libraries = 'pglogical';";
 # # connect to db 
-# # psql "sslmode=disable dbname=postgres user=postgres password=postgres hostaddr=34.175.108.166"
+# # psql "sslmode=disable dbname=postgres user=postgres password=postgres hostaddr=ENV"
 
 # # psql -h "$POSTGRES_HOST" -p "$POSTGRES_PORT" -d "$POSTGRES_DB" -U "$POSTGRES_USER" -c "CREATE ROLE replication WITH REPLICATION LOGIN PASSWORD 'password';"
 

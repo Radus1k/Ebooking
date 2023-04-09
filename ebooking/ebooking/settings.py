@@ -38,6 +38,7 @@ ALLOWED_HOSTS = []
 
 LOGIN_REDIRECT_URL ='/'
 LOGOUT_REDIRECT_URL  ='accounts:log_in'
+LOGIN_URL ='/accounts/log-in/'
 
 # Application definition
 
@@ -97,9 +98,6 @@ TEMPLATES = [
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
-print("********** IS PRODUCTION: ",IS_PRODUCTION, "***************RUN DOCKERIZED: ", RUN_DOCKERIZED)
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -132,8 +130,6 @@ DATABASES = {
      }
 } 
 
-
-print("DATABASES: ", DATABASES)
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 

@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 
-{% load django-bootstrap5 %}
-{% load i18n %}
+{% load django_bootstrap5 %}
 {% load static %}
-{% block content %}
+{% block changeprofile %}
 
     <link href="{% static 'css/changeProfile.css' %}" rel="stylesheet">
 
@@ -22,27 +21,14 @@
                     {% endif %}
                     <form class="box" method="post">
                         {% csrf_token %}
-                        <h4>{% trans 'Editare profil' %}</h4>
+                        <h4>Editare profil</h4>
 
-                        {% for profile_field in form %}
-                            {% if profile_field.name == 'preferinta_notificare' %}
-                                <div class="form-check form-check-inline" style="padding-left: 5% !important;">
-                                    {% bootstrap_field profile_field %}
-                                    <label class="form-check-label" for="inlineCheckbox1">Notificări prin e-mail</label>
-                                    <i class="fa fa-info-circle icon"
-                                       title="Notificări prin e-mail (Interman) privind contul dumneavoastră, cererile de analiză etc."></i>
-                                </div>
-                            {% else %}
-                                <div style="margin-bottom: -10px; margin-top: 30px;">{{ profile_field.label }}</div>
-                                {{ profile_field }}
-{#                                {% bootstrap_field profile_field %}#}
-                            {% endif %}
-                        {% endfor %}
+                      {%bootstrap_form form %}
 
                         <br>
                         <br>
-                        <button type="submit" class="bn5 btn-success" aria-pressed="true">
-                            {% trans 'Modifică' %}
+                        <button type="submit" class="btn btn-secondary"" aria-pressed="true">
+                            Modifică
                         </button>
                     </form>
                 </div>
