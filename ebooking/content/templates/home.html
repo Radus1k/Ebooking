@@ -26,9 +26,9 @@
             </div>
         <div style="text-align:center;">
             {% if not request.user.profile.is_hotel_administrator  %}
-                <a href="{% url 'rentrooms' hotel.id %}" style="text-align:center;"><button type="button" class="btn btn-primary" style="display:no;">Check in</button> </a> 
+                <a href="{% url 'user_hotel_rooms' hotel.id %}" style="text-align:center;"><button type="button" class="btn btn-primary" style="display:no;">Check in</button> </a> 
             {% else %}
-                <a href="{% url 'editrooms' hotel.id %}" style="text-align:center;"><button type="button" class="btn btn-primary" style="display:no;">Editeaza</button> </a> 
+                <a href="{% url 'admin_hotel_rooms' hotel.id %}" style="text-align:center;"><button type="button" class="btn btn-primary" style="display:no;">Vezi camere</button> </a> 
             {% endif %}
         </div>
 

@@ -1,11 +1,10 @@
-
 {% extends 'base.html' %}
 {% load static %}
 
 {% block roomrent %}
 
-<link href="{% static 'css/rent_rooms.css' %}" rel="stylesheet">
-<link href="{% static 'css/js_script' %}" >
+<!-- <link href="{% static 'css/rent_rooms.css' %}" rel="stylesheet">
+<link href="{% static 'css/js_script' %}" > -->
 <body>
 
 <div class="container" style="margin:2em !important;">
@@ -50,6 +49,7 @@
           
           <!-- Product Pricing -->
           <div class="product-price" style="display: inline-block; padding-left: 1em;">
+
             <div>
               <span>Pret: {{ room.price }} LEI </span>
             </div>
@@ -63,12 +63,12 @@
             </div>
           </div>
         </div>
-
-        {% empty %}
-    </div>
-
+        
+      </div>
+    {% empty %}
+      <div class="col-md-12">No rooms available.</div>
     {% endfor %}
-
+  </div>
 </div>
 </body>   
 
