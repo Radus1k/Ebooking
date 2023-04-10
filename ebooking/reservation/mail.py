@@ -12,7 +12,7 @@ def send_mail(to, template, context):
     msg.attach_alternative(html_content, 'text/html')
     msg.send()
 
-def send_mail_v2(to, reservation):
+def send_reservation_mail(to, reservation):
     #!/usr/bin/python
 
     import smtplib

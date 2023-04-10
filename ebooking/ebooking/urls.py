@@ -24,11 +24,18 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('', index, name="home"), 
     path('home', index, name="home"), 
-    path('rentrooms/<int:hotel_id>/', rent_rooms, name="rentrooms"), 
-     path('editrooms/<int:hotel_id>/', edit_rooms, name="editrooms"), 
-    path('reservation/<int:room_id>/', reservation_view, name='reservation'),
+    
+    path('hotel_rooms/<int:hotel_id>/', edit_rooms_view, name="admin_hotel_rooms"), # Hotel Administrator
+    
+    path('rooms/<int:hotel_id>/', hotel_rooms_view, name="user_hotel_rooms"),
+    path('rooms/edit/<int:hotel_id>/<int:room_id>/', edit_room_view, name='edit_room'),
+    path('rooms/add/<int:hotel_id>/', add_room_view, name='add_room'), # Hotel Administrator
+    path('rooms/delete/<int:hotel_id>/<int:room_id>/', delete_room_view, name='delete_room'), # Hotel Administrator
+    path('reservation/<int:room_id>/', reservation_view, name='reservation'), # User reservation
+
     path('accounts/', include('accounts.urls')),
 ]
 

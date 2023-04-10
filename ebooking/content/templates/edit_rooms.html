@@ -1,79 +1,63 @@
 
 {% extends 'base.html' %}
+
 {% load static %}
 
-{% block roomrent %}
+{% load django_bootstrap5 %}
 
-<link href="{% static 'css/rent_rooms.css' %}" rel="stylesheet">
-<link href="{% static 'css/js_script' %}" >
+{% bootstrap_css %}
+
+{% bootstrap_javascript %}
+
+{% bootstrap_messages %}
+
+{% block edit_room %}
+
 <body>
 
-    <div class="container">
+  <div class="container">
+    <h1>Hotel Rooms</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Hotel</th>
+          <th>Image</th>
+          <th>Beds</th>
+          <th>Terrace</th>
+          <th>Kitchen</th>
+          <th>TV</th>
+          <th>Fridge</th>
+          <th>Floor No</th>
+          <th>Price</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
         {% for room in hotelrooms %}
-        <!-- Left Column / Headphones Image -->
-        
-        <div class="left-column">
-
-            
-            <img src="{{ room.image.url }}" alt="img">
-        </div>
-      
-        <!-- Right Column -->
-        <div class="right-column">
-       
-              <!-- Room Description -->
-              <div class="product-description">
-              
-            <h1> Hotelul {{ room.hotel }}</h1>
-                       
-              </div>
-       
-            <div class="product-price">
-                <h3>deține numeroase camere de înaltă calitate. Această cameră se află la etajul {{ room.floor_no }}. <br><br>
-                    &nbsp;  Pentru a vă putea odihni aveți la dispoziție {% if room.beds == 1 %} un pat. {% else %} {{room.beds}} paturi. {% endif %}   <br>    
-                     {% if room.has_terrace == True %}
-                      Vă oferim posibilitatea de a vă răcori seara pe terasa la un pahar de suc rece pe terasa dumneavoastră
-                    {% endif %} <br> <br>
-                 </h3>
-
-                
-              </div>
-
-              <div class="product-description"> </div>
-
-              <h4>DOTĂRI ADIȚIONALE:</h4>
-               
-              {% if room.has_kitchen == True %}
-                    <h4>Bucătărie.<br></h4>
-                  {% endif %}
-                    
-                  {% if room.has_tv == True %}
-                  <h4>Televizor SMART.<br></h4>
-                {% endif %}
-                    
-                {% if room.fridge == True %}
-                    <h4>Frigider.</h4>
-                  {% endif %}
-
-
-              <div class="product-description"></div>
-
-          <!-- Product Configuration -->
-          
-          
-          <!-- Product Pricing -->``
-          <div class="product-price">
-            <span>Pret: {{ room.price }} LEI </span>
-            <a href="{% url 'reservation' room.id %}" class="cart-btn">REZERVA CAMERA</a>
-          </div>
-        </div>
-
-        {% empty %}
+        <tr>
+          <td>{{ room.hotel }}</td>
+          <td><img src="{{ room.image.url }}" style="max-width:5em;" alt="{{ room.hotel }}"></td>
+          <td>{{ room.beds }}</td>
+          <td>{% if room.has_terrace %}Yes{% else %}No{% endif %}</td>
+          <td>{% if room.has_kitchen %}Yes{% else %}No{% endif %}</td>
+          <td>{% if room.has_tv %}Yes{% else %}No{% endif %}</td>
+          <td>{% if room.has_fridge %}Yes{% else %}No{% endif %}</td>
+          <td>{{ room.floor_no }}</td>
+          <td>${{ room.price }}</td>
+          <td><a href="{% url 'edit_room' hotel_id=room.hotel.id room_id=room.id %}" class="btn btn-primary">Edit</a></td>
+          <td><a href="{% url 'delete_room' hotel_id=room.hotel.id room_id=room.id %}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="row justify-content-start">
+      <div class="col-auto">
+        <a href="{% url 'add_room' hotel_id=hotel_id %}" class="btn btn-primary">Add Hotel Room</a>
+      </div>
     </div>
-
-    {% endfor %}
-
-</div>
+  </div>
+  </div>
 </body>   
 
 {% endblock %}
