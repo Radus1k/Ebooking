@@ -13,16 +13,51 @@
 
 {% block edit_room %}
 
-<link href="{% static 'css/rent_rooms.css' %}" rel="stylesheet">
-<link href="{% static 'css/js_script' %}" >
 <body>
 
-    <div class="container">
-      <form>
-        {% csrf_token %}
-        {% bootstrap_form form %}
-      </form>
+  <div class="container">
+    <h1>Hotel Rooms</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Hotel</th>
+          <th>Image</th>
+          <th>Beds</th>
+          <th>Terrace</th>
+          <th>Kitchen</th>
+          <th>TV</th>
+          <th>Fridge</th>
+          <th>Floor No</th>
+          <th>Price</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for room in hotelrooms %}
+        <tr>
+          <td>{{ room.hotel }}</td>
+          <td><img src="{{ room.image.url }}" style="max-width:5em;" alt="{{ room.hotel }}"></td>
+          <td>{{ room.beds }}</td>
+          <td>{% if room.has_terrace %}Yes{% else %}No{% endif %}</td>
+          <td>{% if room.has_kitchen %}Yes{% else %}No{% endif %}</td>
+          <td>{% if room.has_tv %}Yes{% else %}No{% endif %}</td>
+          <td>{% if room.has_fridge %}Yes{% else %}No{% endif %}</td>
+          <td>{{ room.floor_no }}</td>
+          <td>${{ room.price }}</td>
+          <td><a href="{% url 'edit_room' hotel_id=room.hotel.id room_id=room.id %}" class="btn btn-primary">Edit</a></td>
+          <td><a href="{% url 'delete_room' hotel_id=room.hotel.id room_id=room.id %}" class="btn btn-danger">Delete</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="row justify-content-start">
+      <div class="col-auto">
+        <a href="{% url 'add_room' hotel_id=hotel_id %}" class="btn btn-primary">Add Hotel Room</a>
+      </div>
     </div>
+  </div>
+  </div>
 </body>   
 
 {% endblock %}
