@@ -34,8 +34,7 @@ urlpatterns = [
     path('rooms/edit/<int:hotel_id>/<int:room_id>/', edit_room_view, name='edit_room'),
     path('rooms/add/<int:hotel_id>/', add_room_view, name='add_room'), # Hotel Administrator
     path('rooms/delete/<int:hotel_id>/<int:room_id>/', delete_room_view, name='delete_room'), # Hotel Administrator
-    path('reservation/<int:room_id>/', reservation_view, name='reservation'), # User reservation
-
+    path('reservation/', include('reservation.urls')),
     path('accounts/', include('accounts.urls')),
 ]
 

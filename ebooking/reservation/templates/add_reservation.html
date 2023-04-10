@@ -1,0 +1,26 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load django_bootstrap5 %}
+
+{% bootstrap_css %}
+
+{% bootstrap_javascript %}
+
+{% bootstrap_messages %}
+
+{% block add_reservation %}
+
+<div class="container">
+    <h1 style="padding:1em;">Adauga o rezervare </h1> 
+<!-- - {{ room.id}} - {{ room.hotel.name }} -->
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button type="submit" class="btn btn-primary">Adauga</button>
+    </form>
+</div>
+
+{% endblock %}
