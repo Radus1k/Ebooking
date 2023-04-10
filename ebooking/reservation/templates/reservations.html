@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load django_bootstrap5 %}
+
+{% bootstrap_css %}
+
+{% bootstrap_javascript %}
+
+{% bootstrap_messages %}
+
+{% block hotel_reservation %}
+
+<div class="container">
+    <h1 style="padding:1em;">Hotel Reservations</h1>
+    <div class="row">
+      <div class="col">
+        {% if reservations %}
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Hotel</th>
+              <th>Room</th>
+              <th>Begin Date</th>
+              <th>End Date</th>
+              <th>Days</th>
+              <th>Guest Name</th>
+              <th>Phone No.</th>
+              <th>Observations</th>
+              <th>
+              <th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for reservation in reservations %}
+            <tr>
+  
+              <td>{{ reservation.hotelRoom.hotel.name }}</td>
+              <td>{{ reservation.hotelRoom.id }}</td>
+              <td>{{ reservation.begin_at }}</td>
+              <td>{{ reservation.ends_at }}</td>
+              <td>{{ reservation.time_in_days }}</td>
+              <td>{{ reservation.first_name }} {{ reservation.last_name }}</td>
+              <td>{{ reservation.phone_no }}</td>
+              <td>{{ reservation.observations }}</td>
+              <td><a href="{% url 'reservation:edit_reservation' reservation_id=reservation.id %}" class="btn btn-primary">Edit</a></td>
+              <td><a href="{% url 'reservation:delete_reservation' reservation_id=reservation.id hotel_id=reservation.hotelRoom.hotel.id %}" class="btn btn-danger">Delete</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p>No reservations found.</p>
+        {% endif %}
+        <div class="row justify-content-start">
+          <div class="col-auto">
+            <a href="{% url 'reservation:add_reservation' %}" class="btn btn-primary">Add Hotel Room</a>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock %}

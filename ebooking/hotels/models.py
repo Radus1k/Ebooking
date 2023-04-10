@@ -38,3 +38,8 @@ class HotelRoom(models.Model):
 
     class Meta:
         db_table = 'hotelroom'
+
+
+    def __str__(self) -> str:
+        return "Camera hotel: " + self.hotel.name + " cu nr.paturi :" + str(self.beds) + " pret: " + str(self.price) + "  la etajul: " + str(self.floor_no)
+ 

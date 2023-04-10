@@ -29,7 +29,7 @@ def hotel_rooms_view(request, hotel_id):
     hotel_instance = Hotel.objects.get(id=hotel_id)
 
     if not hotel_instance:
-        return HttpResponseForbidden
+        return HttpResponseForbidden()
 
     hotelRooms = HotelRoom.objects.filter(hotel=hotel_id)
     context ={"hotelrooms": hotelRooms}
@@ -38,12 +38,10 @@ def hotel_rooms_view(request, hotel_id):
 
 
 def edit_rooms_view(request, hotel_id):
-    hotel_instance = Hotel.objects.get(id=hotel_id)
-
-    if not hotel_instance:
+    if not request.user.profile.is_hotel_administrator:
         return HttpResponseForbidden
-    
-    hotelRooms = HotelRoom.objects.filter(hotel=hotel_id)
+    hotel_instance = get_object_or_404(Hotel, id=hotel_id)
+    hotelRooms = HotelRoom.objects.filter(hotel=hotel_instance)
     context ={"hotelrooms": hotelRooms, 'hotel_id': hotel_id}
 
 
@@ -51,8 +49,9 @@ def edit_rooms_view(request, hotel_id):
 
 
 def edit_room_view(request, hotel_id, room_id):
+    if not request.user.profile.is_hotel_administrator:
+        return HttpResponseForbidden
     room = get_object_or_404(HotelRoom, id=room_id, hotel__id=hotel_id)
-
     if request.method == 'POST':
         form = HotelRoomForm(request.POST, instance=room)
         if form.is_valid():
@@ -66,6 +65,8 @@ def edit_room_view(request, hotel_id, room_id):
 
 
 def add_room_view(request, hotel_id):
+    if not request.user.profile.is_hotel_administrator:
+        return HttpResponseForbidden
     if request.method == 'POST':
         form = AddHotelRoomForm(request.POST, request.FILES, user=request.user)
         if form.is_valid():
@@ -82,6 +83,8 @@ def add_room_view(request, hotel_id):
     return render(request, 'add_room.html', {'form': form})    
 
 def delete_room_view(request, hotel_id, room_id):
+    if not request.user.profile.is_hotel_administrator:
+        return HttpResponseForbidden
     room = get_object_or_404(HotelRoom, id=room_id, hotel__id=hotel_id)
     try:
         room.delete()

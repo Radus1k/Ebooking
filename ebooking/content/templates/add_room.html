@@ -13,10 +13,10 @@
 {% block add_room %}
 
 <div class="container">
-  <h1>Add Hotel Room</h1>
+  <h1 style="padding:1em;">Add Hotel Room</h1>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% bootstrap_form form %}
     <button type="submit" class="btn btn-primary">Add Room</button>
   </form>
 </div>
