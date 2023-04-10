@@ -8,63 +8,59 @@
 <link href="{% static 'css/js_script' %}" >
 <body>
 
-    <div class="container">
-        {% for room in hotelrooms %}
-        <!-- Left Column / Headphones Image -->
-        
-        <div class="left-column">
-
-            
-            <img src="{{ room.image.url }}" alt="img">
-        </div>
-      
-        <!-- Right Column -->
-        <div class="right-column">
+<div class="container" style="margin:2em !important;">
+  <div class="row">
+    {% for room in hotelrooms %}
+      <div class="col-md-6">
+        <div class="right-column border border-primary border-1" style="margin:1em !important";>
+          <!-- Room Description -->
+          <div class="product-description" style="padding-top:1em; padding-left:1em;">
+            <h4> Hotelul {{ room.hotel }}</h4>           
+          </div>
+          <div class="left-column">
+            <img src="{{ room.image.url }}" style="max-width: 20em; padding-left:1em;" alt="img">
+          </div>
        
-              <!-- Room Description -->
-              <div class="product-description">
-              
-            <h1> Hotelul {{ room.hotel }}</h1>
-                       
-              </div>
-       
-            <div class="product-price">
-                <h3>deține numeroase camere de înaltă calitate. Această cameră se află la etajul {{ room.floor_no }}. <br><br>
-                    &nbsp;  Pentru a vă putea odihni aveți la dispoziție {% if room.beds == 1 %} un pat. {% else %} {{room.beds}} paturi. {% endif %}   <br>    
-                     {% if room.has_terrace == True %}
-                      Vă oferim posibilitatea de a vă răcori seara pe terasa la un pahar de suc rece pe terasa dumneavoastră
-                    {% endif %} <br> <br>
-                 </h3>
+          <div style="padding-left: 1em;";>
+            <h6>deține numeroase camere de înaltă calitate. Această cameră se află la etajul {{ room.floor_no }}. <br><br>
+            Pentru a vă putea odihni aveți la dispoziție {% if room.beds == 1 %} un pat. {% else %} {{room.beds}} paturi. {% endif %}   <br>    
+            {% if room.has_terrace == True %}
+              Vă oferim posibilitatea de a vă răcori seara pe terasa la un pahar de suc rece pe terasa dumneavoastră
+            {% endif %} <br> <br>
+          </h6>
+          </div>
 
-                
-              </div>
-
-              <div class="product-description"> </div>
-
-              <h4>DOTĂRI ADIȚIONALE:</h4>
+          <p style="padding-left: 1em;">DOTĂRI ADIȚIONALE:</p>
                
-              {% if room.has_kitchen == True %}
-                    <h4>Bucătărie.<br></h4>
-                  {% endif %}
+          {% if room.has_kitchen == True %}
+            <p style="padding-left: 1em;">Bucătărie.<br></p>
+          {% endif %}
                     
-                  {% if room.has_tv == True %}
-                  <h4>Televizor SMART.<br></h4>
-                {% endif %}
+          {% if room.has_tv == True %}
+            <p style="padding-left: 1em;">Televizor SMART.<br></p>
+          {% endif %}
                     
-                {% if room.fridge == True %}
-                    <h4>Frigider.</h4>
-                  {% endif %}
+          {% if room.fridge == True %}
+            <p style="padding-left: 1em;">Frigider.</p>
+          {% endif %}
 
-
-              <div class="product-description"></div>
+          <div class="product-description" style="padding-left: 1em;"></div>
 
           <!-- Product Configuration -->
           
-          
-          <!-- Product Pricing -->``
-          <div class="product-price">
-            <span>Pret: {{ room.price }} LEI </span>
-            <a href="{% url 'reservation' room.id %}" class="cart-btn">REZERVA CAMERA</a>
+          <!-- Product Pricing -->
+          <div class="product-price" style="display: inline-block; padding-left: 1em;">
+            <div>
+              <span>Pret: {{ room.price }} LEI </span>
+            </div>
+            <div style="padding-top: 1em; margin-bottom: 1em;">
+              <a href="{% url 'reservation' room.id %}" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                </svg>
+                Rezerva
+              </a>
+            </div>
           </div>
         </div>
 
