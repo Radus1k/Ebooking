@@ -89,3 +89,4 @@ def delete_room_view(request, hotel_id, room_id):
     except:
         messages.error(request, 'Error deleting room.')
     return redirect('admin_hotel_rooms', hotel_id=hotel_id)
+
