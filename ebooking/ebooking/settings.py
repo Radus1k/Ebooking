@@ -52,7 +52,7 @@ INSTALLED_APPS = [
 
     # Vendor apps
     'django_bootstrap5',
-
+    'django_filters',
     # Ebooking apps
     'ebooking',
     'hotels',
@@ -147,10 +147,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
-
-# Internationalization
-# https://docs.djangoproject.com/en/4.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 

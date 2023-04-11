@@ -1,12 +1,12 @@
 from django.db import models
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 # Create your models here.
 
 class Hotel(models.Model):
     image = models.ImageField(upload_to='hotel/', null=True)
-    name = models.CharField(max_length=50, null=False)
-    stars= models.PositiveIntegerField(null=False)
-    
+    name = models.CharField(max_length=50, null=False)    
     city = models.CharField(max_length=50)
     region = models.CharField(max_length=50)
     country = models.CharField(max_length=50)
@@ -21,6 +21,13 @@ class Hotel(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    @property
+    def average_rating(self):
+        reviews = self.reviews.all()
+        if reviews:
+            total_rating = sum([review.rating for review in reviews])
+            return round(total_rating / len(reviews), 1)
+        return 0
     class Meta:
         db_table = 'hotel'
 
@@ -39,7 +46,16 @@ class HotelRoom(models.Model):
     class Meta:
         db_table = 'hotelroom'
 
-
     def __str__(self) -> str:
         return "Camera hotel: " + self.hotel.name + " cu nr.paturi :" + str(self.beds) + " pret: " + str(self.price) + "  la etajul: " + str(self.floor_no)
- 
+    
+
+class Review(models.Model):
+    hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.PositiveIntegerField()
+    text = models.TextField()
+    
+    def __str__(self) -> str:
+        return f'{self.hotel.name} - {self.rating}'
+  

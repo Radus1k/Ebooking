@@ -113,8 +113,11 @@ def signup_view(request):
             profile.save()
             user.save()
 
+            user = authenticate(username=user.username, password=user_form.cleaned_data['password1'])
+            login(request, user)   
+             
             messages.success(request,
-                             _('Cont creat cu succes! Verificați inbox-ul pentru a vă confirma adresa de e-mail!'))
+                             _('Cont creat cu succes! Verificați inbox-ul pentru mai multe informatii!'))
 
             return redirect('/')
         else:

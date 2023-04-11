@@ -8,9 +8,9 @@
 
     <div class="singupclass">
 
-        <div class="container" style="color: white;">
+        <div class="container" style="color: white; padding-top: 4%; width: 50%; height: 50%; margin: auto; padding-left:10em;" >
             <div class="row">
-                <div class="col-7 col-xs-8 col-sm-7 col-md-6 col-xl-6">
+                <div class="col-12 col-xs-12 col-sm-12 col-md-6 col-xl-9">
                     <div class="card">
                         {% if user_form.errors %}
                             {% for field in form %}
@@ -32,6 +32,7 @@
                         {% endif %}
 
                         <form class="box align-middle" method="post" style="border-radius: 25px">
+                            <img src="{% static '/images/hotelv2.png' %}" height="70em" width="70em" alt="My image">
                             {% csrf_token %}
                             <h4>Înregistrare</h4>
                             <p class="text-muted">Vă rugăm introduceți datele pentru crearea contului</p>

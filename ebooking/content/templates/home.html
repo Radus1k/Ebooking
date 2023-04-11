@@ -1,48 +1,50 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load my_filters %}
 {% block hotelrent %}
 
-<link href="{% static 'css/hotels.css' %}" rel="stylesheet">
+{% load django_bootstrap5 %}
 
-<body style="background-color:white;">
-<div class="flex-container">
+{% bootstrap_css %}
 
-    {% for hotel in all_hotels %}
+{% bootstrap_javascript %}
 
-    <div class="hotel_rent">
-        <div class="hotel_name">
-            {{ hotel.name }}
-        </div>
-        <img src= "{{ hotel.image.url }}" class="hotel_img">
+{% bootstrap_messages %}
 
-            <div class="hotel_stars">
-                {% with ''|center:hotel.stars as range %}
-                {% for _ in range %}
-                    <img src="{% static '/images/star.png' %}" style="display:inline-block; width:2em; height:2em";>
-                {% endfor %}
-                {% endwith %}
+<body class="bg-white">
+    <div class="d-flex flex-wrap" style="margin:1em;">
 
+        {% for hotel in all_hotels %}
+
+        <div class="card m-2" style="max-width: 18rem;">
+            <img src="{{ hotel.image.url }}" class="card-img-top" alt="{{ hotel.name }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ hotel.name }}</h5>
+                <div class="d-flex align-items-center">
+                    {% with rating=hotel.average_rating|floatformat:0|add:0 %}
+                    {% for x in rating|times %} 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
+                        <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
+                      </svg>
+                    {% endfor %}
+                  {% endwith %}
+                </div>      
+                <div style="padding-top:0.5em;">
+                    <a href="{% url 'reviews' hotel.id %}" class="btn btn-primary">Vezi review-uri</a>
+                </div>       
+                <div class="d-grid mt-3">
+                    {% if not request.user.profile.is_hotel_administrator and not request.user.is_superuser %}
+                        <a href="{% url 'user_hotel_rooms' hotel.id %}" class="btn btn-primary">Check in</a>
+                    {% else %}
+                        <a href="{% url 'admin_hotel_rooms' hotel.id %}" class="btn btn-primary">Vezi camere</a>
+                    {% endif %}
+                </div>
             </div>
-        <div style="text-align:center;">
-            {% if not request.user.profile.is_hotel_administrator  %}
-                <a href="{% url 'user_hotel_rooms' hotel.id %}" style="text-align:center;"><button type="button" class="btn btn-primary" style="display:no;">Check in</button> </a> 
-            {% else %}
-                <a href="{% url 'admin_hotel_rooms' hotel.id %}" style="text-align:center;"><button type="button" class="btn btn-primary" style="display:no;">Vezi camere</button> </a> 
-            {% endif %}
         </div>
 
+        {% endfor %}
 
-
-
-    </div>  
-
-</div>
-
-
-    {% endfor %}
-
-</div>   
+    </div>
 </body>
 
 

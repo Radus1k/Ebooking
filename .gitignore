@@ -4,7 +4,6 @@
 *.pyc 
 /*/migrations/*
 docker/
-ebooking/secrets.json
 ebooking/hotels/migrations
 ebooking/hotels/migrations/*
 ebooking/reservation/migrations/*

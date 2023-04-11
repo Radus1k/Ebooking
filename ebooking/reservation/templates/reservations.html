@@ -10,10 +10,28 @@
 
 {% bootstrap_messages %}
 
-{% block hotel_reservation %}
+{% block reservations %}
+
 
 <div class="container">
-    <h1 style="padding:1em;">Hotel Reservations</h1>
+    {% if request.user.is_superuser %}
+      <h1 style="padding:1em;">All reservations</h1>
+    {% elif request.profile.is_hotel_administrator %}
+      <h1 style="padding:1em;">Your hotels reservations</h1>
+    {% else %}
+      <h1 style="padding:1em;">Your reservations</h1>
+    {% endif %}
+    <div class="filters">
+      <div class="card-body">
+          <form method="get">
+              {% bootstrap_form filter.form %}
+    
+              <button class="btn btn-primary" type="submit">
+                  Caută
+              </button>
+          </form>
+      </div>
+    </div>
     <div class="row">
       <div class="col">
         {% if reservations %}
@@ -55,7 +73,7 @@
         {% endif %}
         <div class="row justify-content-start">
           <div class="col-auto">
-            <a href="{% url 'reservation:add_reservation' %}" class="btn btn-primary">Add Hotel Room</a>
+            <a href="{% url 'reservation:add_reservation' %}" class="btn btn-primary">Adauga Rezervare</a>
           </div>
         </div>
       </div>
