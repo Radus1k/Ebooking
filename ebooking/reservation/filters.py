@@ -31,7 +31,18 @@ class BaseFilter(django_filters.FilterSet):
 
 
 # Filter used by staff
+
+class HotelNameFilter(CharFilter):
+    field_class = forms.CharField
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('lookup_expr', 'icontains')  # set the lookup expression
+        kwargs.setdefault('label', 'Hotel Name')
+        kwargs.setdefault('widget', forms.TextInput(attrs={'placeholder': 'Enter hotel name'}))
+        super().__init__(*args, **kwargs)
+
 class ReservationFilter(BaseFilter):
+    hotel_name = HotelNameFilter(field_name='hotelRoom__hotel__name')
+
     class Meta:
         model = Reservation
         fields = {
@@ -39,4 +50,3 @@ class ReservationFilter(BaseFilter):
             'last_name': ['icontains'],
             'phone_no': ['exact'],
         }
-    # phone_no = forms.CharField(label="Phone number") 

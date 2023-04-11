@@ -12,11 +12,10 @@
 
 {% block reservations %}
 
-
 <div class="container">
     {% if request.user.is_superuser %}
       <h1 style="padding:1em;">All reservations</h1>
-    {% elif request.profile.is_hotel_administrator %}
+    {% elif request.user.profile.is_hotel_administrator %}
       <h1 style="padding:1em;">Your hotels reservations</h1>
     {% else %}
       <h1 style="padding:1em;">Your reservations</h1>

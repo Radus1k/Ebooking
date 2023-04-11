@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load my_filters %}
+
 {% block hotelrent %}
 
 {% load django_bootstrap5 %}
@@ -11,13 +12,20 @@
 
 {% bootstrap_messages %}
 
+{% if request.user.is_superuser %}
+<h3 style="padding:1em;">Hotele</h1>
+{% elif request.user.profile.is_hotel_administrator %}
+<h3 style="padding:1em;">Hotele pe care le administrati </h1>
+{% else %}
+<h3 style="padding:1em;">Hotele disponibile</h1>
+{% endif %}
 <body class="bg-white">
     <div class="d-flex flex-wrap" style="margin:1em;">
-
+  
         {% for hotel in all_hotels %}
 
-        <div class="card m-2" style="max-width: 18rem;">
-            <img src="{{ hotel.image.url }}" class="card-img-top" alt="{{ hotel.name }}">
+        <div class="card m-2">
+            <img src="{{ hotel.image.url }}" class="card-img-top" style="max-width:25em; " alt="{{ hotel.name }}">
             <div class="card-body">
                 <h5 class="card-title">{{ hotel.name }}</h5>
                 <div class="d-flex align-items-center">
@@ -34,7 +42,7 @@
                 </div>       
                 <div class="d-grid mt-3">
                     {% if not request.user.profile.is_hotel_administrator and not request.user.is_superuser %}
-                        <a href="{% url 'user_hotel_rooms' hotel.id %}" class="btn btn-primary">Check in</a>
+                        <a href="{% url 'user_hotel_rooms' hotel.id %}" class="btn btn-primary">Alege camera</a>
                     {% else %}
                         <a href="{% url 'admin_hotel_rooms' hotel.id %}" class="btn btn-primary">Vezi camere</a>
                     {% endif %}

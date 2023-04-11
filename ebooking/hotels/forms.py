@@ -42,6 +42,6 @@ class ReviewForm(forms.ModelForm):
     def clean_text(self):
         text = self.cleaned_data.get('text')
         rating = self.cleaned_data.get('rating')
-        if rating and rating < 5 and len(text) < 50:
+        if rating is not None and rating < 5 and len(text) < 50:
             raise forms.ValidationError('Text must be at least 50 characters for ratings less than 5.')
-        return text
+        return text 

@@ -16,7 +16,7 @@ def reservation_view(request, room_id):
     """
    Function that serves logic of a user reservation form
     """
-    form = ReservationForm()
+    form = ReservationForm(is_admin=False)
     # function body here
     if request.method=="POST":
         form = ReservationForm(request.POST)
@@ -63,12 +63,16 @@ def edit_reservation_view(request, reservation_id):
     reservation = get_object_or_404(Reservation, id=reservation_id)
 
     if request.method == 'POST':
-        form = ReservationForm(request.POST, instance=reservation)
+        form = ReservationForm(request.POST, is_admin=True, instance=reservation)
         if form.is_valid():
             form.save()
-            return redirect('reservation:hotel_reservations')
+            messages.success(request, 'Rezervare editata cu succes')
+            return redirect('reservations')
+        else:
+            messages.success(request, 'A aparut o eroare!')  
+            return redirect('reservations')  
     else:
-        form = ReservationForm(instance=reservation)
+        form = ReservationForm(instance=reservation, is_admin=True,)
 
     context = {'form': form, 'reservation': reservation}
     return render(request, 'edit_reservation.html', context=context)
@@ -78,9 +82,10 @@ def add_reservation_view(request):
         form = ReservationForm(request.POST)
         if form.is_valid():
             reservation = form.save(commit=False)
+            reservation.user = request.user
             reservation.save()
             messages.success(request, 'Reservation added successfully.')
-            return redirect('reservation:hotel_reservations')
+            return redirect('reservation:reservations')
         else:
             messages.error(request, 'Reservation data incorrect.')
     else:
@@ -96,4 +101,4 @@ def delete_reservation_view(request, reservation_id, hotel_id):
         messages.success(request, 'Reservation deleted successfully.')
     except:
         messages.error(request, 'Error deleting reservation.')
-    return redirect('reservation:hotel_reservations')
+    return redirect('reservations')

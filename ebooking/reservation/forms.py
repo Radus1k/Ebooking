@@ -14,3 +14,9 @@ class ReservationForm(forms.ModelForm):
                 'ends_at': forms.SelectDateWidget(),
             }    
         phone_no = forms.CharField(label="Phone number") 
+
+    def __init__(self, *args, **kwargs):
+        is_admin = kwargs.pop('is_admin', False)
+        super().__init__(*args, **kwargs)
+        if not is_admin:
+            self.fields.pop('status')

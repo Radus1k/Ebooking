@@ -9,24 +9,21 @@ from django.http import HttpResponseBadRequest
 from django.contrib import messages
 from django.db.models import Avg
 from .forms import ReviewForm
+from accounts.models import Profile
 
 def index(request):
     # if not request.user.is_authenticated:
     #     return redirect(reverse_lazy('accounts:log_in'))
     user = request.user
 
-    if user.is_superuser:
+    if user.is_superuser or not user.is_authenticated:
         all_hotel_objs = Hotel.objects.all()
     elif user.profile.is_hotel_administrator:
         all_hotel_objs = user.profile.hotels.all()
     else:
         all_hotel_objs = Hotel.objects.all()
     
-    hotel_reviews = []
-    for hotel in all_hotel_objs:
-        avg_rating = hotel.reviews.aggregate(Avg('rating'))['rating__avg']
-        hotel_reviews.append(avg_rating)
-    context = {"all_hotels": all_hotel_objs, "hotel_reviews": hotel_reviews}
+    context = {"all_hotels": all_hotel_objs}
     return render(request, "home.html", context=context)
 
 @login_required
@@ -101,16 +98,25 @@ def delete_room_view(request, hotel_id, room_id):
     return redirect('admin_hotel_rooms', hotel_id=hotel_id)
 
 def reviews_view(request, hotel_id):
+    hotel = get_object_or_404(Hotel, pk=hotel_id)
     reviews = Review.objects.filter(hotel_id=hotel_id)
 
-    context = {'reviews': reviews,'hotel_id': hotel_id}
+    context = {'reviews': reviews,'hotel': hotel}
     return render(request, 'reviews.html',context=context)
     
 
 def add_review_view(request, hotel_id):
     user = request.user
-    if not user.is_authenticated:
+    try:
+        profile = request.user.profile
+        if profile.is_hotel_administrator:
+            return HttpResponseForbidden() # Hoetl Administrators
+    except Profile.DoesNotExist:
+        profile = None
+    
+    if not user.is_authenticated or user.is_superuser:
         return HttpResponseForbidden()
+
     hotel = get_object_or_404(Hotel, pk=hotel_id)
     user = request.user
     if request.method == 'POST':
@@ -120,6 +126,7 @@ def add_review_view(request, hotel_id):
             review.hotel = hotel
             review.user = user
             review.save()
+            messages.success(request, 'Review adaugat cu succes!')
             return redirect('reviews', hotel_id=hotel_id)
     else:
         form = ReviewForm()
