@@ -7,7 +7,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ebooking.settings')
 
 RUN_DOCKERIZED = os.environ.get('RUN_DOCKERIZED')
 
-# REDIS_HOST = 'redis' if RUN_DOCKERIZED else '127.0.0.1'
+REDIS_HOST = 'redis' if RUN_DOCKERIZED else '127.0.0.1'
 REDIS_HOST = '0.0.0.0'
 # REDIS_PASSWD = 'lruPYlSfRqeh-meq-21Z1fsxK6c'
 # REDIS_PORT = 6379

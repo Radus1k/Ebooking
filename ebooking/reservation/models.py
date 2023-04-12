@@ -21,7 +21,6 @@ class Reservation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, blank=False) # oneToMany
     begin_at = models.DateTimeField(blank=False, default=datetime.datetime.now, null=False)
     ends_at = models.DateTimeField(blank=False, default=datetime.datetime.now, null=False)
-    time_in_days = models.PositiveIntegerField(null=True)
     registered_at = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     observations = models.CharField(max_length=500)

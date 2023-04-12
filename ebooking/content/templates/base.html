@@ -12,7 +12,8 @@
 <title>
     Ebooking
 </title>
-
+{% comment %} <script src="https://unpkg.com/@popperjs/core@2.9.3"></script> {% endcomment %}
+<script src="https://unpkg.com/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"></script>
 {% if request.path != '/accounts/log-in/' and request.path != '/accounts/sign-up/' %}
   <nav class="navbar navbar-expand-lg navbar-light bg-primary">
     <a class="navbar-brand" style="margin-left:2em;"  href="{% url 'home' %}">Management </a> <img src="{% static '/images/hotelv2.png' %}" height="70em" width="70em" alt="My image">
@@ -30,6 +31,15 @@
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="http://localhost:8025/">Mail <span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="edit-profile-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Profile
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="edit-profile-dropdown">
+              <li><a class="dropdown-item" href="{% url 'accounts:change_password' %}">Resetare parolă</a></li>
+              <li><a class="dropdown-item" href="{% url 'accounts:change_profile' %}">Editeaza profilul</a></li>
+            </ul>
           </li>
           {% if request.user.is_superuser %}
           <li class="nav-item active">

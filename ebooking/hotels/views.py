@@ -26,7 +26,6 @@ def index(request):
     context = {"all_hotels": all_hotel_objs}
     return render(request, "home.html", context=context)
 
-@login_required
 def hotel_rooms_view(request, hotel_id):
     hotel_instance = Hotel.objects.get(id=hotel_id)
 
@@ -107,11 +106,16 @@ def reviews_view(request, hotel_id):
 
 def add_review_view(request, hotel_id):
     user = request.user
+    
+    if not user.is_authenticated:
+        return HttpResponseForbidden()
+
     try:
         profile = request.user.profile
         if profile.is_hotel_administrator:
             return HttpResponseForbidden() # Hoetl Administrators
-    except Profile.DoesNotExist:
+    except Profile.DoesNotExist: 
+
         profile = None
     
     if not user.is_authenticated or user.is_superuser:

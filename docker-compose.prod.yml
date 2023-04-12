@@ -31,65 +31,65 @@ services:
     depends_on:
       - local_db1
       - local_db2
-      - celery_beat
-      - celery_worker
+      # - celery_beat
+      # - celery_worker
 
-  celery_beat:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile.celery
-    command: celery -A ebooking.celery beat
-    volumes:
-      - .:/usr/src/app
-    hostname: celery_beat
-    container_name: celery_beat
-    environment:
-      - RUN_DOCKERIZED=1
-      - PYTHONDONTWRITEBYTECODE=1
-      - PYTHONUNBUFFERED=1
-      - POSTGRES_NAME=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+  # celery_beat:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/Dockerfile.celery
+  #   command: celery -A ebooking.celery beat
+  #   volumes:
+  #     - .:/usr/src/app
+  #   hostname: celery_beat
+  #   container_name: celery_beat
+  #   environment:
+  #     - RUN_DOCKERIZED=1
+  #     - PYTHONDONTWRITEBYTECODE=1
+  #     - PYTHONUNBUFFERED=1
+  #     - POSTGRES_NAME=postgres
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
 
-    depends_on:
-      - celery_worker
+  #   depends_on:
+  #     - celery_worker
 
-  celery_worker:
-    build:
-      context: .
-      dockerfile: docker/Dockerfile.celery
-    command: celery -A ebooking.celery worker
-    volumes:
-      - .:/usr/src/app
-      - /tmp:/tmp
-    hostname: celery_worker
-    container_name: celery_worker
-    environment:
-      - RUN_DOCKERIZED=1
-      - PYTHONDONTWRITEBYTECODE=1
-      - PYTHONUNBUFFERED=1
-      - POSTGRES_NAME=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    depends_on:
-      - redis
-      - db_postgres
+  # celery_worker:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/Dockerfile.celery
+  #   command: celery -A ebooking.celery worker
+  #   volumes:
+  #     - .:/usr/src/app
+  #     - /tmp:/tmp
+  #   hostname: celery_worker
+  #   container_name: celery_worker
+  #   environment:
+  #     - RUN_DOCKERIZED=1
+  #     - PYTHONDONTWRITEBYTECODE=1
+  #     - PYTHONUNBUFFERED=1
+  #     - POSTGRES_NAME=postgres
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #   depends_on:
+  #     - redis
+  #     - db_postgres
 
-  redis:
-    tty: true
-    build:
-      context: .
-      dockerfile: docker/Dockerfile.redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - /tmp:/tmp
-    hostname: redis
-    container_name: redis
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
-    restart: on-failure
+  # redis:
+  #   tty: true
+  #   build:
+  #     context: .
+  #     dockerfile: docker/Dockerfile.redis
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - /tmp:/tmp
+  #   hostname: redis
+  #   container_name: redis
+  #   environment:
+  #     - ALLOW_EMPTY_PASSWORD=yes
+  #     - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
+  #   restart: on-failure
 
   db_pgadmin:
     image: dpage/pgadmin4
@@ -164,10 +164,10 @@ services:
     
 
   
-  test_email_server:
-    image: mailhog/mailhog
-    ports:
-      - "1025:1025"
-      - "8025:8025"
-    depends_on:
-    - django_dev
+  # test_email_server:
+  #   image: mailhog/mailhog
+  #   ports:
+  #     - "1025:1025"
+  #     - "8025:8025"
+  #   depends_on:
+  #   - django_dev

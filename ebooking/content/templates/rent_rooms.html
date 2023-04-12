@@ -3,17 +3,25 @@
 
 {% block roomrent %}
 
+{% load django_bootstrap5 %}
+
+{% bootstrap_css %}
+
+{% bootstrap_javascript %}
+
+{% bootstrap_messages %}
+
 <!-- <link href="{% static 'css/rent_rooms.css' %}" rel="stylesheet">
 <link href="{% static 'css/js_script' %}" > -->
 <body>
 
-<div class="container" style="margin:2em !important;">
+<div class="container" style="background-color: #F2F3F5; max-width:150em; margin-top:2em;">
   <div class="row">
     {% for room in hotelrooms %}
-      <div class="col-md-6">
-        <div class="right-column border border-primary border-1" style="margin:1em !important";>
+      {% comment %} <div class="col-md-6"> {% endcomment %}
+        <div class="right-column border" style=" background-color:white; margin:2em; max-width:98%;";>
           <!-- Room Description -->
-          <div class="product-description" style="padding-top:1em; padding-left:1em;">
+          <div class="product-description">
             <h4> Hotelul {{ room.hotel }}</h4>           
           </div>
           <div class="left-column">
@@ -64,7 +72,7 @@
           </div>
         </div>
         
-      </div>
+      {% comment %} </div> {% endcomment %}
     {% empty %}
       <div class="col-md-12"><b>No rooms available.</b></div>
     {% endfor %}

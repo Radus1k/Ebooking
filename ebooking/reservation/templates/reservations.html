@@ -2,15 +2,17 @@
 
 {% load static %}
 
+{% block reservations %}
+
 {% load django_bootstrap5 %}
 
 {% bootstrap_css %}
 
 {% bootstrap_javascript %}
 
+
 {% bootstrap_messages %}
 
-{% block reservations %}
 
 <div class="container">
     {% if request.user.is_superuser %}
