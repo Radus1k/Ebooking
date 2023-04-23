@@ -199,7 +199,6 @@ class ChangePasswordView(BasePasswordChangeView):
         self.form_class.error_messages['password_mismatch'] = "Parolele din cele două câmpuri trebuie să fie identice!"
 
     def form_valid(self, form):
-        print("DATA: ", form.cleaned_data)
         if 'new_password1' in form.cleaned_data and 'old_password' in form.cleaned_data:
             old_password = form.cleaned_data['old_password']
             new_password = form.cleaned_data['new_password1']
