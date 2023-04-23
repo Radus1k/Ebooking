@@ -37,7 +37,7 @@ def hotel_rooms_view(request, hotel_id):
 
     return render(request, template_name='rent_rooms.html', context=context)
 
-
+@login_required
 def edit_rooms_view(request, hotel_id):
     if request.user.is_superuser:
         return HttpResponseForbidden()
@@ -52,8 +52,10 @@ def edit_rooms_view(request, hotel_id):
 
 
 def edit_room_view(request, hotel_id, room_id):
+    if not hasattr(request.user, 'profile'):
+        return HttpResponseForbidden()
     if not request.user.profile.is_hotel_administrator:
-        return HttpResponseForbidden
+        return HttpResponseForbidden()
     room = get_object_or_404(HotelRoom, id=room_id, hotel__id=hotel_id)
     if request.method == 'POST':
         form = HotelRoomForm(request.POST, instance=room)
@@ -66,8 +68,13 @@ def edit_room_view(request, hotel_id, room_id):
     context = {'form': form, 'room': room, }
     return render(request, 'edit_room.html',context=context)
 
-
+       
+@login_required
 def add_room_view(request, hotel_id):
+    if not hasattr(request.user, 'profile'):
+        return HttpResponseForbidden()
+    if request.user.is_authenticated and request.user.profile.is_hotel_administrator:
+        return HttpResponseForbidden()
     if not request.user.profile.is_hotel_administrator:
         return HttpResponseForbidden
     if request.method == 'POST':
@@ -85,7 +92,10 @@ def add_room_view(request, hotel_id):
         form = AddHotelRoomForm(user=request.user)
     return render(request, 'add_room.html', {'form': form})    
 
+@login_required
 def delete_room_view(request, hotel_id, room_id):
+    if request.user.is_authenticated and request.user.profile.is_hotel_administrator:
+        return HttpResponseForbidden()
     if not request.user.profile.is_hotel_administrator:
         return HttpResponseForbidden
     room = get_object_or_404(HotelRoom, id=room_id, hotel__id=hotel_id)

@@ -37,4 +37,4 @@ class Reservation(models.Model):
         return delta.days
 
     def __str__(self):
-        return self.user.first_name + " " + self.user.last_name + " reservation at " + self.hotelRoom.hotel.name + "at " + self.hotelRoom.__str__()
+        return self.user.first_name + " " + self.user.last_name + " reservation at " + self.hotelRoom.hotel.name + " at " + self.hotelRoom.__str__()
