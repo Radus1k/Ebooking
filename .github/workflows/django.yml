@@ -32,3 +32,8 @@ jobs:
       run: |
         cd ebooking
         coverage run manage.py test
+        coverage report
+    - name: Get Coverage
+      run: |
+        cd ebooking
+        coverage report -m
