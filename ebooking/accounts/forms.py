@@ -53,7 +53,6 @@ class SignInViaEmailForm(SignIn):
 
     def __init__(self, *args, **kwargs):
         super(SignInViaEmailForm, self).__init__(*args, **kwargs)
-        print("init sign in via form")
         # self.fields['email'].widget.attrs['placeholder'] = "Introduceti emailul..."
 
     def clean_email(self):

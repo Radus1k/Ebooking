@@ -37,7 +37,10 @@
         {% for room in hotelrooms %}
         <tr>
           <td>{{ room.hotel }}</td>
-          <td><img src="{{ room.image.url }}" style="max-width:5em;" alt="{{ room.hotel }}"></td>
+          {% if room.image %}
+            <img src="{{ room.image.url }}" style="max-width:5em;" alt="{{ room.hotel }}">
+          {% endif %}
+          </td>
           <td>{{ room.beds }}</td>
           <td>{% if room.has_terrace %}Yes{% else %}No{% endif %}</td>
           <td>{% if room.has_kitchen %}Yes{% else %}No{% endif %}</td>

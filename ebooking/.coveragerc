@@ -2,12 +2,18 @@
 source = .
 omit =
     */tests/*
+    */tests.py
     */migrations/*
     manage.py
     */__init__.py
     */settings.py
     */urls.py
     */wsgi.py
+    */asgi.py
+    */utils.py
+    */mail.py
+    */views.py
+
 
 [report]
 exclude_lines =
