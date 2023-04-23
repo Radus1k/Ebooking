@@ -97,38 +97,52 @@ TEMPLATES = [
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+POSTGRES_NAME = os.environ.get('POSTGRES_NAME')
+POSTGRES_USER = os.environ.get('POSTGRES_USER')
+POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_NAME'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'TIME_ZONE': 'Europe/Bucharest',
-        'HOST': 'db_postgres',
-        'PORT': '5432'    
+print(RUN_DOCKERIZED)
+print(POSTGRES_NAME)
+print(IS_PRODUCTION)
+if not RUN_DOCKERIZED and not IS_PRODUCTION and not POSTGRES_NAME:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
-    
-     if RUN_DOCKERIZED and not IS_PRODUCTION else {
-       'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_NAME'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'TIME_ZONE': 'Europe/Bucharest',
-        'HOST': 'local_db1',
-        'PORT': '5432',
-    },
-     'secondary': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_NAME'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'TIME_ZONE': 'Europe/Bucharest',
-        'HOST': 'local_db2',
-        'PORT': '5433'}
-     }
-} 
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('POSTGRES_NAME'),
+            'USER': os.environ.get('POSTGRES_USER'),
+            'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+            'TIME_ZONE': 'Europe/Bucharest',
+            'HOST': 'db_postgres',
+            'PORT': '5432'    
+            }
+
+        if RUN_DOCKERIZED and not IS_PRODUCTION else {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('POSTGRES_NAME'),
+            'USER': os.environ.get('POSTGRES_USER'),
+            'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+            'TIME_ZONE': 'Europe/Bucharest',
+            'HOST': 'local_db1',
+            'PORT': '5432',
+        },
+        'secondary': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('POSTGRES_NAME'),
+            'USER': os.environ.get('POSTGRES_USER'),
+            'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+            'TIME_ZONE': 'Europe/Bucharest',
+            'HOST': 'local_db2',
+            'PORT': '5433'}
+        }
+    } 
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
