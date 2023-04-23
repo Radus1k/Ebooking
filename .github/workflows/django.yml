@@ -27,4 +27,4 @@ jobs:
         pip install -r ebooking/requirements.txt
     - name: Run Tests
       run: |
-        coverage run manage.py test
+        coverage run ebooking/manage.py test
