@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block reviews %}
+
+{% load django_bootstrap5 %}
+
+{% bootstrap_css %}
+
+{% bootstrap_javascript %}
+
+{% bootstrap_messages %}
+
+<div class="container">
+    <h1 style="padding:1em;">Reviews for {{ hotel.name }}</h1>
+    <div class="row">
+      <div class="col">
+        {% if reviews %}
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Rating</th>
+              <th>Observatii</th>
+              <th>User</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for review in reviews %}
+            <tr>
+              <td>{{ review.rating }}</td>
+              <td>{{ review.text }}</td>
+              <td>{{ review.user.first_name }} {{ review.user.last_name }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <p>No reviews found.</p>
+        {% endif %}
+        <div class="row justify-content-start">
+          <div class="col-auto">
+            <a href="{% url 'add_review' hotel_id=hotel.id %}" class="btn btn-primary">Add Review</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  {% endblock %}

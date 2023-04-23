@@ -29,6 +29,8 @@ urlpatterns = [
     path('home', index, name="home"), 
     
     path('hotel_rooms/<int:hotel_id>/', edit_rooms_view, name="admin_hotel_rooms"), # Hotel Administrator
+    path('reviews/<int:hotel_id>/', reviews_view, name="reviews"), # Hotel Administrator
+    path('add_review/<int:hotel_id>/', add_review_view, name="add_review"), # Hotel Administrator
     
     path('rooms/<int:hotel_id>/', hotel_rooms_view, name="user_hotel_rooms"),
     path('rooms/edit/<int:hotel_id>/<int:room_id>/', edit_room_view, name='edit_room'),

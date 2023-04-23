@@ -1,9 +1,8 @@
-
 {% extends 'base.html' %}
 
 {% load static %}
 
-{% block edit_room %}
+{% block add_review %}
 
 {% load django_bootstrap5 %}
 
@@ -15,12 +14,12 @@
 
 {% bootstrap_messages %}
 
-  <h1>Editeaza camera </h1> 
-  <!-- - {{ room.id}} - {{ room.hotel.name }} -->
+<div class="container">
+  <h1 style="padding:1em;">Add Review</h1>
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-  {% bootstrap_form form %}
-    <button type="submit" class="btn btn-primary">Salveaza</button>
+    {% bootstrap_form form %}
+    <button type="submit" class="btn btn-primary">Add Revew</button>
   </form>
-
+</div>
 {% endblock %}

@@ -9,8 +9,8 @@
 {% bootstrap_css %}
 
 {% bootstrap_javascript %}
-{% comment %} 
-{% bootstrap_messages %} {% endcomment %}
+
+{% bootstrap_messages %}
 
     <link href="{% static 'css/login.css' %}" rel="stylesheet">
 
@@ -30,6 +30,7 @@
                     {% endif %}
 
                     <form class="box" method="post" style="padding:2em; ">
+                        <a style="margin-left:2em;"  >Management Hotelier </a> <img src="{% static '/images/hotelv2.png' %}" height="70em" width="70em" alt="My image">
                         {% csrf_token %}
                         <h2>Autentificare</h2>
                         <p class="text-muted">Vă rugăm introduceți datele pentru autentificare.</p>
@@ -39,11 +40,7 @@
                             <button type="submit" class="btn btn-primary " aria-pressed="true">Conectare</button>
                         </div>  
                         <div style="display: inline-block; padding-top:2em;">
-                        <a class="btn btn-secondary" href="{% url 'accounts:sign_up' %}">Creare cont</a>
-                         
-                        <a class="btn btn-secondary" href="{% url 'accounts:restore_password' %}">Resetare
-                                    parolă</a>
-                           
+                        <a class="btn btn-secondary" href="{% url 'accounts:sign_up' %}">Creare cont</a>                    
                         </div>
                       
                     </form>

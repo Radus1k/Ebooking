@@ -6,49 +6,58 @@
 
 {% bootstrap_javascript %}
 
-{% bootstrap_messages %}
 
 
 <!DOCTYPE html>
 <title>
     Ebooking
 </title>
-
-
-<nav class="navbar navbar-expand-lg navbar-light bg-primary">
-  <a class="navbar-brand" style="margin-left:2em;"  href="{% url 'home' %}">Management </a> <img src="{% static '/images/hotelv2.png' %}" height="70em" width="70em" alt="My image">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  {% if request.user.is_authenticated %}
-    <div class="collapse navbar-collapse" id="navbarText" style="padding-left:2em;">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only"></span></a>
-        </li>
-      
-        {% if request.user.is_authenticated %}
-          {% with profile=request.user.profile %}
-          {% if profile.is_hotel_administrator or request.user.is_superuser %}
-            <li class="nav-item active">
-              <a class="nav-link" href="{% url 'reservation:hotel_reservations' %}">Rezervari <span class="sr-only"></span></a>
-            </li>
+{% comment %} <script src="https://unpkg.com/@popperjs/core@2.9.3"></script> {% endcomment %}
+<script src="https://unpkg.com/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"></script>
+{% if request.path != '/accounts/log-in/' and request.path != '/accounts/sign-up/' %}
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <a class="navbar-brand" style="margin-left:2em;"  href="{% url 'home' %}">Management </a> <img src="{% static '/images/hotelv2.png' %}" height="70em" width="70em" alt="My image">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    {% if request.user.is_authenticated %}
+      <div class="collapse navbar-collapse" id="navbarText" style="padding-left:2em;">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'reservation:reservations' %}">Reservations <span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="http://localhost:8025/">Mail <span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="edit-profile-dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Profile
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="edit-profile-dropdown">
+              <li><a class="dropdown-item" href="{% url 'accounts:change_password' %}">Resetare parolă</a></li>
+              <li><a class="dropdown-item" href="{% url 'accounts:change_profile' %}">Editeaza profilul</a></li>
+            </ul>
+          </li>
+          {% if request.user.is_superuser %}
+          <li class="nav-item active">
+            <a class="nav-link"href="{% url 'admin:index' %}">Manage Data<span class="sr-only"></span></a>
+          </li>
           {% endif %}
-         {% endwith %}
-      {% endif %}
-        <li class="nav-item active">
-          <a class="nav-link" href="http://localhost:8025/">Mail <span class="sr-only"></span></a>
-        </li>
-      </ul>
-    {% endif %}
-      {% if not request.user.is_authenticated %}
-        <a class="nav-link" style="color:black; margin-right:2em; margin-left: auto; margin-right:2em;" href="{% url 'accounts:log_in' %}">Login </a>
-      {% else %}
-     
-      <a style="padding-right:20px; margin-right:2; margin-left: auto; margin-right: 2em;" >Hi, {{ request.user.first_name}} {{ request.user.last_name }}  </a> <a class="nav-link" style="color:black; padding-right:1em; " href="{% url 'accounts:log_out' %}">  Logout </a>
-      {% endif %}
-    </div>
-  </nav>
+        {% endif %}
+        </ul>
+       
+        {% if not request.user.is_authenticated %}
+          <a class="nav-link" style="color:black; margin-right:2em; margin-left: auto; margin-right:2em;" href="{% url 'accounts:log_in' %}">Login </a>
+        {% else %}
+      
+        <a style="padding-right:20px; margin-right:2; margin-left: auto; margin-right: 2em;" >Hi, {{ request.user.first_name}} {{ request.user.last_name }}  </a> <a class="nav-link" style="color:black; padding-right:1em; " href="{% url 'accounts:log_out' %}">  Logout </a>
+        {% endif %}
+      </div>
+    </nav>
+  {% endif %}
 {% comment %} 
 {% if messages %}
 <ul class="messages">
@@ -76,14 +85,15 @@
   {% block reservation %}
   {% endblock %}
 
-  {% block add_reservation %}
+  {% block reservations %}
   {% endblock %}
 
   {% block edit_reservation %}
   {% endblock %}
 
-  {% block hotel_reservation %}
+  {% block add_reservation %}
   {% endblock %}
+  
 
   {% block login %}
   {% endblock %}
@@ -106,8 +116,10 @@
   {% block add_room %}
   {% endblock %}
 
-  {% block delete_room %}
+  {% block reviews %}
   {% endblock %}
-  
+
+  {% block add_review %}
+  {% endblock %}
 
 </body>

@@ -1,0 +1,63 @@
+[
+    {
+      "model": "hotels.review",
+      "pk": 1,
+      "fields": {
+        "user": 1,
+        "rating": 4,
+        "hotel":1,
+        "text": "This product exceeded my expectations. Highly recommended!"
+      }
+    },
+    {
+      "model": "hotels.review",
+      "pk": 2,
+      "fields": {
+        "user": 1,
+        "rating": 2,
+        "hotel":2,
+        "text": "Disappointed with this product. Not worth the price."
+      }
+    },
+    {
+        "model": "hotels.review",
+        "pk": 3,
+        "fields": {
+          "user": 1,
+          "rating": 5,
+          "hotel":3,
+          "text": "Disappointed with this product. Not worth the price."
+        }
+    },
+    {
+        "model": "hotels.review",
+        "pk": 4,
+        "fields": {
+          "hotel":4,
+          "user": 1,
+          "rating": 2,
+          "text": "Disappointed with this product. Not worth the price."
+        }
+      },
+      {
+        "model": "hotels.review",
+        "pk": 5,
+        "fields": {
+          "hotel":5,
+          "user": 1,
+          "rating": 4,
+          "text": "Disappointed with this product. Not worth the price."
+        }
+      },
+
+      {
+        "model": "hotels.review",
+        "pk": 6,
+        "fields": {
+          "hotel":6,
+          "user": 1,
+          "rating": 5,
+          "text": "Disappointed with this product. Not worth the price."
+        }
+      }
+]

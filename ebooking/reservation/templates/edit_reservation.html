@@ -11,13 +11,16 @@
 
 {% bootstrap_messages %}
 
-{% block edit_reservation %}
+<link href="{% static 'css/edit_reservation.css' %}" rel="stylesheet">
 
-  <h1>Editeaza rezervarea </h1> 
+{% block edit_reservation %}
+  <div class="container"> 
+  <h1 style="padding:1em;">Editeaza rezervarea </h1> 
+  <div class="warning" title="Reservation date must be changed before 72 hours before the begin date!">ℹ</div>
   <form method="post" enctype="multipart/form-data">
 {% csrf_token %}
   {% bootstrap_form form %}
     <button type="submit" class="btn btn-primary">Salveaza</button>
   </form>
-
+</div>
 {% endblock %}

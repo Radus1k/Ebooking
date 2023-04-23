@@ -1,30 +1,31 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseForbidden
-from hotels.models import Hotel, HotelRoom
+from hotels.models import Hotel, HotelRoom, Review
 from django.contrib.auth.decorators import login_required
 from .forms import HotelRoomForm, AddHotelRoomForm
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.http import HttpResponseBadRequest
 from django.contrib import messages
+from django.db.models import Avg
+from .forms import ReviewForm
+from accounts.models import Profile
 
 def index(request):
     # if not request.user.is_authenticated:
     #     return redirect(reverse_lazy('accounts:log_in'))
     user = request.user
 
-    if not user.is_authenticated:   
+    if user.is_superuser or not user.is_authenticated:
         all_hotel_objs = Hotel.objects.all()
+    elif user.profile.is_hotel_administrator:
+        all_hotel_objs = user.profile.hotels.all()
     else:
-        if user.profile.is_hotel_administrator:
-            all_hotel_objs = user.profile.hotels.all()
-        else:
-            all_hotel_objs = Hotel.objects.all()
+        all_hotel_objs = Hotel.objects.all()
     
     context = {"all_hotels": all_hotel_objs}
     return render(request, "home.html", context=context)
 
-@login_required
 def hotel_rooms_view(request, hotel_id):
     hotel_instance = Hotel.objects.get(id=hotel_id)
 
@@ -38,8 +39,10 @@ def hotel_rooms_view(request, hotel_id):
 
 
 def edit_rooms_view(request, hotel_id):
+    if request.user.is_superuser:
+        return HttpResponseForbidden()
     if not request.user.profile.is_hotel_administrator:
-        return HttpResponseForbidden
+        return HttpResponseForbidden()
     hotel_instance = get_object_or_404(Hotel, id=hotel_id)
     hotelRooms = HotelRoom.objects.filter(hotel=hotel_instance)
     context ={"hotelrooms": hotelRooms, 'hotel_id': hotel_id}
@@ -93,3 +96,42 @@ def delete_room_view(request, hotel_id, room_id):
         messages.error(request, 'Error deleting room.')
     return redirect('admin_hotel_rooms', hotel_id=hotel_id)
 
+def reviews_view(request, hotel_id):
+    hotel = get_object_or_404(Hotel, pk=hotel_id)
+    reviews = Review.objects.filter(hotel_id=hotel_id)
+
+    context = {'reviews': reviews,'hotel': hotel}
+    return render(request, 'reviews.html',context=context)
+    
+
+def add_review_view(request, hotel_id):
+    user = request.user
+    
+    if not user.is_authenticated:
+        return HttpResponseForbidden()
+
+    try:
+        profile = request.user.profile
+        if profile.is_hotel_administrator:
+            return HttpResponseForbidden() # Hoetl Administrators
+    except Profile.DoesNotExist: 
+
+        profile = None
+    
+    if not user.is_authenticated or user.is_superuser:
+        return HttpResponseForbidden()
+
+    hotel = get_object_or_404(Hotel, pk=hotel_id)
+    user = request.user
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.hotel = hotel
+            review.user = user
+            review.save()
+            messages.success(request, 'Review adaugat cu succes!')
+            return redirect('reviews', hotel_id=hotel_id)
+    else:
+        form = ReviewForm()
+    return render(request, 'add_review.html', {'form': form, 'hotel': hotel})
