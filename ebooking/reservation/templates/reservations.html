@@ -44,9 +44,11 @@
               <th>Begin Date</th>
               <th>End Date</th>
               <th>Days</th>
+              <th>Status</th>
               <th>Guest Name</th>
               <th>Phone No.</th>
               <th>Observations</th>
+            
               <th>
               <th>
             </tr>
@@ -59,7 +61,8 @@
               <td>{{ reservation.hotelRoom.id }}</td>
               <td>{{ reservation.begin_at }}</td>
               <td>{{ reservation.ends_at }}</td>
-              <td>{{ reservation.time_in_days }}</td>
+              <td>{{ reservation.duration_in_days }} </td>
+              <td>{{ reservation.status }}</td>
               <td>{{ reservation.first_name }} {{ reservation.last_name }}</td>
               <td>{{ reservation.phone_no }}</td>
               <td>{{ reservation.observations }}</td>

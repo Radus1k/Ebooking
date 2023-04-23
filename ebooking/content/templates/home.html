@@ -43,7 +43,7 @@
                 </div>       
                 <div class="d-grid mt-3">
                     {% if not request.user.profile.is_hotel_administrator and not request.user.is_superuser %}
-                        <a href="{% url 'user_hotel_rooms' hotel.id %}" class="btn btn-primary">Alege camera</a>
+                        <a href="{% url 'user_hotel_rooms' hotel.id %}" class="btn btn-primary">Vezi camere</a>
                     {% else %}
                         <a href="{% url 'admin_hotel_rooms' hotel.id %}" class="btn btn-primary">Vezi camere</a>
                     {% endif %}

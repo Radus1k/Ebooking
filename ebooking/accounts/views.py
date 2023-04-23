@@ -184,7 +184,6 @@ class ChangePasswordView(BasePasswordChangeView):
 
     def __init__(self, *args, **kwargs):
         super(ChangePasswordView, self).__init__()
-        print("called")
         self.form_class.base_fields['old_password'].help_text = ''
         self.form_class.base_fields['old_password'].label = ''
         self.form_class.base_fields['old_password'].widget.attrs['placeholder'] = 'Parolă veche'
@@ -196,13 +195,18 @@ class ChangePasswordView(BasePasswordChangeView):
         self.form_class.base_fields['new_password2'].label = ''
         self.form_class.base_fields['new_password2'].widget.attrs['placeholder'] = 'Confirmarea noii parole'
 
-        for error in self.form_class.error_messages:
-            print(error)
-
         self.form_class.error_messages['password_incorrect'] = "Parola veche nu este corectă!"
         self.form_class.error_messages['password_mismatch'] = "Parolele din cele două câmpuri trebuie să fie identice!"
 
     def form_valid(self, form):
+        print("DATA: ", form.cleaned_data)
+        if 'new_password1' in form.cleaned_data and 'old_password' in form.cleaned_data:
+            old_password = form.cleaned_data['old_password']
+            new_password = form.cleaned_data['new_password1']
+            if old_password == new_password:
+                form.add_error('new_password1', _('Noua parolă trebuie să fie diferită de cea veche.'))
+                return self.form_invalid(form)
+
         # Change the password
         user = form.save()
 

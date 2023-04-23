@@ -77,7 +77,7 @@ class ProfileForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
 
-        self.fields['phone'].widget.attrs['placeholder'] = "Introduceți numarul de phone"
+        self.fields['phone'].widget.attrs['placeholder'] = "Introduceți numarul de telefon"
 
 
 class SignUpForm(UserCreationForm):

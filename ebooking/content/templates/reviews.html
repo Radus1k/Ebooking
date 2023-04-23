@@ -29,7 +29,7 @@
             <tr>
               <td>{{ review.rating }}</td>
               <td>{{ review.text }}</td>
-              <td>{{ review.user.email }}</td>
+              <td>{{ review.user.first_name }} {{ review.user.last_name }}</td>
             </tr>
             {% endfor %}
           </tbody>

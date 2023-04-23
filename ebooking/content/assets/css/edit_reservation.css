@@ -1,0 +1,29 @@
+.warning {
+    display: inline-block;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #f2a41d; /* Change background color to yellow */
+    color: #fff;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .warning:hover::before {
+    content: attr(title);
+    display: block;
+    position: absolute;
+    z-index: 9999;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f2a41d; /* Use same background color as icon */
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+  }

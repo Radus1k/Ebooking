@@ -23,7 +23,7 @@ class Reservation(models.Model):
     ends_at = models.DateTimeField(blank=False, default=datetime.datetime.now, null=False)
     registered_at = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
-    observations = models.CharField(max_length=500)
+    observations = models.CharField(max_length=500,blank=True, null=True)
     phone_no = models.CharField(max_length=15)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -31,4 +31,10 @@ class Reservation(models.Model):
 
     class Meta:
         db_table = 'reservation'
-   
+    
+    def duration_in_days(self):
+        delta = self.ends_at - self.begin_at
+        return delta.days
+
+    def __str__(self):
+        return self.user.first_name + " " + self.user.last_name + " reservation at " + self.hotelRoom.hotel.name + "at " + self.hotelRoom.__str__()
