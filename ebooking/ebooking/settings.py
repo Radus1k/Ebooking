@@ -101,9 +101,7 @@ POSTGRES_NAME = os.environ.get('POSTGRES_NAME')
 POSTGRES_USER = os.environ.get('POSTGRES_USER')
 POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
 
-print(RUN_DOCKERIZED)
-print(POSTGRES_NAME)
-print(IS_PRODUCTION)
+
 if not RUN_DOCKERIZED and not IS_PRODUCTION and not POSTGRES_NAME:
     DATABASES = {
         'default': {
