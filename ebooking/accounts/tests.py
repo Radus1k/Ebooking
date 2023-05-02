@@ -199,7 +199,7 @@ class SignupViewTestCase(TestCase):
         self.assertRedirects(response, '/')
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
-        self.assertEqual(str(messages[0]), 'Cont creat cu succes! Verificați inbox-ul pentru mai multe informatii!')
+        self.assertEqual(str(messages[0]), 'Account created succcesfully! check email for more info!')
 
         user = User.objects.get(email='johndoe@test.com')
         self.assertEqual(user.first_name, 'John')

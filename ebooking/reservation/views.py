@@ -18,6 +18,8 @@ def reservation_view(request, room_id):
     """
    Function that serves logic of a user reservation form
     """
+
+    print("Called")
     form = ReservationForm(is_admin=False)
     # function body here
     if request.method=="POST":
@@ -100,6 +102,8 @@ def add_reservation_view(request):
                 reservation.user = request.user
                 reservation.save()
                 messages.success(request, 'Reservation added successfully.')
+                print("Sending email...")
+                async_send_mail.delay(to=user.email, reservation_id=reservation.id)
                 return redirect('reservation:reservations')
             else:
                 messages.error(request, 'Reservation data incorrect.')

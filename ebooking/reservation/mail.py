@@ -24,7 +24,7 @@ def send_reservation_mail(to, reservation):
     body_msg = "You have reserved rooms with success"
     # hotel name -> reservation.hotelroom.hotel.name
     header = "Dear " + reservation.first_name + reservation.last_name + "\n Thanks for reservation \n here are your reservation data: "
-    body = "Check in : " + reservation.begin_at + "\n" + "Check out: " + reservation.ends_at + "\n" + "Observations: " + reservation.observations + "\n\n" + "Enjoy!!" 
+    body = "Check in : " + str(reservation.begin_at) + "\n" + "Check out: " + str(reservation.ends_at) + "\n" + "Observations: " + reservation.observations + "\n\n" + "Enjoy!!" 
 
     port = 1025
     msg = MIMEText(header + body)

@@ -4,6 +4,10 @@
 *.pyc 
 /*/migrations/*
 docker/
+ebooking/content/media/*
+ebooking/content/static
+ebooking/content/static/*
+ebooking/ebooking/content/static/*
 ebooking/hotels/migrations
 ebooking/hotels/migrations/*
 ebooking/reservation/migrations/*
