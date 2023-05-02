@@ -117,7 +117,7 @@ def signup_view(request):
             login(request, user)   
              
             messages.success(request,
-                             _('Cont creat cu succes! Verificați inbox-ul pentru mai multe informatii!'))
+                             _('Account created succcesfully! check email for more info!'))
 
             return redirect('/')
         else:
